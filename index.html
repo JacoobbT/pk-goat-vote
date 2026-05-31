@@ -13,21 +13,21 @@
     header h1 { font-family:'Fredoka One',cursive; font-size:clamp(2rem,6vw,4.5rem); letter-spacing:2px; background:linear-gradient(90deg,#ff4757,#f9ca24,#00b894,#8e44ad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s infinite; }
     @keyframes shimmer { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.3)} }
     header p { color:#aaa; font-size:1.1rem; margin-top:6px; }
-    .live-pill { display:inline-flex; align-items:center; gap:6px; background:#1e1e2e; border:1px solid #333; border-radius:20px; padding:4px 14px; font-size:0.8rem; font-weight:700; margin-top:10px; color:#aaa; }
+    .live-pill { display:inline-flex; align-items:center; gap:6px; background:#1e1e2e; border:1px solid #333; border-radius:20px; padding:4px 14px; font-size:.8rem; font-weight:700; margin-top:10px; color:#aaa; }
     .live-dot { width:8px; height:8px; border-radius:50%; background:#555; }
     .live-dot.connected { background:#00b894; box-shadow:0 0 6px #00b894; animation:pulse 1.5s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
     .results-section { max-width:900px; margin:30px auto 0; padding:0 20px; }
     .results-section h2 { font-family:'Fredoka One',cursive; font-size:1.6rem; margin-bottom:14px; color:#eee; text-align:center; }
-    .result-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-    .result-label { width:130px; font-weight:700; font-size:.95rem; white-space:nowrap; }
-    .bar-track { flex:1; height:26px; background:#1e1e2e; border-radius:13px; overflow:hidden; }
-    .bar-fill { height:100%; border-radius:13px; transition:width .6s cubic-bezier(.34,1.56,.64,1); display:flex; align-items:center; padding-left:10px; font-size:.8rem; font-weight:900; color:rgba(0,0,0,.7); }
-    .result-count { width:30px; text-align:center; font-weight:900; font-size:1.1rem; }
+    .result-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .result-label { width:130px; font-weight:700; font-size:.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .bar-track { flex:1; height:24px; background:#1e1e2e; border-radius:12px; overflow:hidden; }
+    .bar-fill { height:100%; border-radius:12px; transition:width .6s cubic-bezier(.34,1.56,.64,1); display:flex; align-items:center; padding-left:10px; font-size:.75rem; font-weight:900; color:rgba(0,0,0,.75); }
+    .result-count { width:30px; text-align:center; font-weight:900; font-size:1.05rem; }
     .voters-section { max-width:960px; margin:36px auto; padding:0 20px; }
     .voters-section h2 { font-family:'Fredoka One',cursive; font-size:1.6rem; margin-bottom:20px; color:#eee; text-align:center; }
     .voters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
-    .voter-card { background:#1a1a2e; border-radius:20px; padding:24px 16px; text-align:center; border:3px solid transparent; position:relative; overflow:hidden; }
+    .voter-card { background:#1a1a2e; border-radius:20px; padding:24px 16px; text-align:center; border:3px solid transparent; position:relative; }
     .voter-card[data-voter="javidia"] { border-color:var(--javidia); }
     .voter-card[data-voter="vlad"]    { border-color:var(--vlad); }
     .voter-card[data-voter="ludvig"]  { border-color:var(--ludvig); }
@@ -38,70 +38,69 @@
     .voter-card[data-voter="ludvig"]  .voter-avatar { border-color:var(--ludvig); }
     .voter-card[data-voter="yakopo"]  .voter-avatar { border-color:var(--yakopo); }
     .voter-name { font-family:'Fredoka One',cursive; font-size:1.3rem; }
-    .voter-title { color:#888; font-size:.85rem; margin-bottom:12px; }
-    .vote-status { font-size:.85rem; font-weight:700; padding:6px 14px; border-radius:20px; display:inline-block; margin-bottom:10px; }
-    .vote-status.pending { background:#2a2a3e; color:#666; }
-    .vote-btn { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; padding:10px 22px; border-radius:25px; font-family:'Nunito',sans-serif; font-weight:900; font-size:.95rem; cursor:pointer; transition:transform .15s,box-shadow .15s; width:100%; }
+    .voter-title { color:#888; font-size:.85rem; margin-bottom:10px; }
+    .picks-wrap { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; margin-bottom:10px; min-height:28px; }
+    .pick-pill { font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:14px; background:#2a2a3e; color:#ccc; }
+    .vote-btn { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; padding:10px 22px; border-radius:25px; font-family:'Nunito',sans-serif; font-weight:900; font-size:.9rem; cursor:pointer; transition:transform .15s,box-shadow .15s; width:100%; margin-bottom:8px; }
     .vote-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(102,126,234,.5); }
-    .vote-btn:disabled { background:#2a2a3e; color:#555; cursor:not-allowed; transform:none; box-shadow:none; }
-    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:100; align-items:center; justify-content:center; padding:20px; }
+    .change-btn { background:#2a2a3e; color:#aaa; border:none; padding:7px 18px; border-radius:20px; font-family:'Nunito',sans-serif; font-weight:700; font-size:.82rem; cursor:pointer; width:100%; transition:background .15s; }
+    .change-btn:hover { background:#333; color:#fff; }
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:100; align-items:center; justify-content:center; padding:16px; }
     .modal-overlay.active { display:flex; }
-    .modal { background:#1a1a2e; border-radius:24px; padding:30px; width:100%; max-width:860px; max-height:90vh; overflow-y:auto; border:2px solid #333; }
-    .modal h3 { font-family:'Fredoka One',cursive; font-size:1.8rem; text-align:center; margin-bottom:24px; }
-    .destinations-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:16px; }
-    .dest-card { border-radius:16px; overflow:hidden; cursor:pointer; border:3px solid transparent; transition:transform .2s,border-color .2s,box-shadow .2s; background:#0f0f1a; }
-    .dest-card:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(255,255,255,.1); }
-    .dest-card.selected { border-color:#f9ca24; box-shadow:0 0 20px rgba(249,202,36,.4); }
-    .dest-img { width:100%; height:110px; object-fit:cover; display:block; }
-    .dest-img-fallback { width:100%; height:110px; display:flex; align-items:center; justify-content:center; font-size:3rem; }
-    .dest-info { padding:10px 10px 12px; }
-    .dest-name { font-family:'Fredoka One',cursive; font-size:1.1rem; }
-    .dest-tag  { color:#888; font-size:.72rem; margin-top:2px; }
-    .modal-actions { display:flex; gap:12px; justify-content:center; margin-top:24px; }
-    .btn-confirm { background:linear-gradient(135deg,#f9ca24,#f0932b); color:#000; border:none; padding:12px 36px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:900; font-size:1rem; cursor:pointer; transition:transform .15s; }
-    .btn-confirm:hover { transform:scale(1.05); }
-    .btn-confirm:disabled { opacity:.4; cursor:not-allowed; transform:none; }
-    .btn-cancel { background:#2a2a3e; color:#aaa; border:none; padding:12px 24px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; }
-    .winner-section { display:none; text-align:center; max-width:600px; margin:0 auto 40px; padding:36px 24px; background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:24px; border:3px solid #f9ca24; box-shadow:0 0 60px rgba(249,202,36,.25); }
+    .modal { background:#1a1a2e; border-radius:24px; padding:28px; width:100%; max-width:920px; max-height:92vh; overflow-y:auto; border:2px solid #333; }
+    .modal h3 { font-family:'Fredoka One',cursive; font-size:1.6rem; text-align:center; margin-bottom:6px; }
+    .modal-sub { text-align:center; color:#888; font-size:.85rem; margin-bottom:20px; }
+    .destinations-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:12px; }
+    .dest-card { border-radius:14px; overflow:hidden; cursor:pointer; border:3px solid transparent; transition:transform .18s,border-color .18s,box-shadow .18s; background:#0f0f1a; position:relative; }
+    .dest-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,255,255,.08); }
+    .dest-card.selected { border-color:#f9ca24; box-shadow:0 0 18px rgba(249,202,36,.35); }
+    .dest-check { position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%; background:#f9ca24; display:none; align-items:center; justify-content:center; font-size:.75rem; font-weight:900; color:#000; z-index:1; }
+    .dest-card.selected .dest-check { display:flex; }
+    .dest-img { width:100%; height:90px; object-fit:cover; display:block; }
+    .dest-img-fallback { width:100%; height:90px; display:flex; align-items:center; justify-content:center; font-size:2.4rem; }
+    .dest-info { padding:8px 8px 10px; }
+    .dest-name { font-family:'Fredoka One',cursive; font-size:1rem; }
+    .dest-tag { color:#777; font-size:.67rem; margin-top:1px; line-height:1.3; }
+    .modal-actions { display:flex; gap:12px; justify-content:center; margin-top:20px; align-items:center; }
+    .btn-confirm { background:linear-gradient(135deg,#f9ca24,#f0932b); color:#000; border:none; padding:12px 32px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:900; font-size:1rem; cursor:pointer; transition:transform .15s; white-space:nowrap; }
+    .btn-confirm:hover:not(:disabled) { transform:scale(1.04); }
+    .btn-confirm:disabled { opacity:.4; cursor:not-allowed; }
+    .btn-cancel { background:#2a2a3e; color:#aaa; border:none; padding:12px 22px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; }
+    .winner-section { display:none; text-align:center; max-width:640px; margin:0 auto 40px; padding:36px 24px; background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:24px; border:3px solid #f9ca24; box-shadow:0 0 60px rgba(249,202,36,.2); }
     .winner-section.visible { display:block; }
-    .winner-section h2 { font-family:'Fredoka One',cursive; font-size:2.2rem; color:#f9ca24; margin-bottom:8px; }
-    .winner-name { font-size:3rem; font-family:'Fredoka One',cursive; margin:10px 0; }
-    .winner-section p { color:#aaa; }
+    .winner-section h2 { font-family:'Fredoka One',cursive; font-size:2rem; color:#f9ca24; margin-bottom:8px; }
+    .winner-name { font-size:2.6rem; font-family:'Fredoka One',cursive; margin:10px 0 6px; }
+    .winner-section p { color:#aaa; font-size:.9rem; }
     .reset-btn { background:#2a2a3e; color:#aaa; border:none; padding:10px 24px; border-radius:20px; font-family:'Nunito',sans-serif; font-weight:700; cursor:pointer; margin-top:16px; font-size:.9rem; }
     .reset-btn:hover { background:#333; color:#fff; }
     .confetti-piece { position:fixed; width:10px; height:10px; top:-10px; animation:confettiFall linear forwards; border-radius:2px; z-index:999; pointer-events:none; }
     @keyframes confettiFall { to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
-    .spinner { display:inline-block; width:16px; height:16px; border:2px solid #444; border-top-color:#f9ca24; border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle; margin-right:6px; }
+    .spinner { display:inline-block; width:15px; height:15px; border:2px solid #444; border-top-color:#f9ca24; border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle; margin-right:5px; }
     @keyframes spin { to { transform:rotate(360deg); } }
   </style>
 </head>
 <body>
 <header>
   <h1>🦍 PK GOAT TRIP 2026 🏆</h1>
-  <p>Four legends. Five destinations. One vote. Let’s go.</p>
+  <p>Four legends. Many destinations. Pick your favourites. Let’s go.</p>
   <div class="live-pill"><span class="live-dot" id="liveDot"></span><span id="liveLabel">Connecting…</span></div>
 </header>
-<div class="results-section">
-  <h2>📊 Live Scoreboard</h2>
-  <div id="results"></div>
-</div>
+<div class="results-section"><h2>📊 Live Scoreboard</h2><div id="results"></div></div>
 <div class="winner-section" id="winnerSection">
   <h2>🎉 WE HAVE A WINNER 🎉</h2>
   <div class="winner-name" id="winnerName"></div>
   <p id="winnerSub"></p>
   <button class="reset-btn" onclick="resetVotes()">🔄 Reset all votes</button>
 </div>
-<div class="voters-section">
-  <h2>🗳️ Cast Your Vote</h2>
-  <div class="voters-grid" id="votersGrid"></div>
-</div>
+<div class="voters-section"><h2>🗳️ Cast Your Vote</h2><div class="voters-grid" id="votersGrid"></div></div>
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3 id="modalTitle"></h3>
+    <p class="modal-sub">Tap to pick one or more destinations, then lock it in.</p>
     <div class="destinations-grid" id="destGrid"></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-confirm" id="confirmBtn" onclick="confirmVote()" disabled>✅ Lock it in!</button>
+      <button class="btn-confirm" id="confirmBtn" onclick="confirmVote()" disabled>🔒 Pick something first</button>
     </div>
   </div>
 </div>
@@ -114,95 +113,105 @@
     {id:'yakopo',name:'Yakopo',title:'The Champ',color:'#f9ca24',avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=champion&mouth=lilSmile&eyes=stars',emoji:'🏆'}
   ];
   const DESTINATIONS=[
-    {id:'malaga',name:'Malaga',flag:'🇪🇸',emoji:'🌊',tag:'Puerto Banús • Beach clubs • Costa del Sol',color:'#ff6b35',img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=220&fit=crop&q=80',meme:'Señorita, another round please 💃'},
-    {id:'athens',name:'Athens',flag:'🇬🇷',emoji:'🏛️',tag:'Rooftop bars • Ouzo • Acropolis views',color:'#00cec9',img:'https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=220&fit=crop&q=80',meme:'OPA! 🥃'},
-    {id:'barcelona',name:'Barcelona',flag:'🇪🇸',emoji:'🎨',tag:'Barceloneta • Pacha • Tapas',color:'#6c5ce7',img:'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&h=220&fit=crop&q=80',meme:'Visca Barça 🐓'},
-    {id:'malta',name:'Malta',flag:'🇲🇹',emoji:'🏰',tag:'Blue Lagoon • Paceville • Comino',color:'#fdcb6e',img:'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=400&h=220&fit=crop&q=80',meme:"Europe's hidden gem 💎"},
-    {id:'split',name:'Split',flag:'🇭🇷',emoji:'⛵',tag:'Hvar boat parties • Old Town • Croatia',color:'#00b894',img:'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=220&fit=crop&q=80',meme:'Živjeli! 🍺'}
+    {id:'barcelona',name:'Barcelona',flag:'🇪🇸',emoji:'🎨',tag:'Barceloneta • Pacha • Tapas',color:'#6c5ce7',img:'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&h=180&fit=crop&q=80'},
+    {id:'ibiza',name:'Ibiza',flag:'🇪🇸',emoji:'🎉',tag:'Ushuàia • Pacha • Boat parties',color:'#e84393',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=180&fit=crop&q=80'},
+    {id:'malta',name:'Malta',flag:'🇲🇹',emoji:'🏰',tag:'Blue Lagoon • Paceville • Comino',color:'#fdcb6e',img:'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=400&h=180&fit=crop&q=80'},
+    {id:'malaga',name:'Malaga',flag:'🇪🇸',emoji:'🌊',tag:'Puerto Banús • Beach clubs • Costa del Sol',color:'#ff6b35',img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=180&fit=crop&q=80'},
+    {id:'prague',name:'Prague',flag:'🇨🇿',emoji:'🍺',tag:'Beer capital • Old Town • Nightlife',color:'#a29bfe',img:'https://images.unsplash.com/photo-1541849546-216549ae216d?w=400&h=180&fit=crop&q=80'},
+    {id:'gdansk',name:'Gdańsk',flag:'🇵🇱',emoji:'⚓',tag:'Baltic beaches • Vodka • Old town',color:'#74b9ff',img:'https://images.unsplash.com/photo-1569396116180-90b531757dce?w=400&h=180&fit=crop&q=80'},
+    {id:'krakow',name:'Kraków',flag:'🇵🇱',emoji:'🏰',tag:'Cheapest party city in Europe',color:'#55efc4',img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=180&fit=crop&q=80'},
+    {id:'split',name:'Split',flag:'🇭🇷',emoji:'⛵',tag:'Hvar boat parties • Old Town • Croatia',color:'#00b894',img:'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=180&fit=crop&q=80'},
+    {id:'athens',name:'Athens',flag:'🇬🇷',emoji:'🏛️',tag:'Rooftop bars • Ouzo • Acropolis',color:'#00cec9',img:'https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=180&fit=crop&q=80'},
+    {id:'mykonos',name:'Mykonos',flag:'🇬🇷',emoji:'🌬️',tag:'Paradise Beach • Windmills • Glamour',color:'#fd79a8',img:'https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=180&fit=crop&q=80'},
+    {id:'dubrovnik',name:'Dubrovnik',flag:'🇭🇷',emoji:'🏰',tag:'Game of Thrones • Old walls • Adriatic',color:'#e17055',img:'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=180&fit=crop&q=80'},
+    {id:'rhodes',name:'Rhodes',flag:'🇬🇷',emoji:'☀️',tag:'Faliraki strip • Ancient city • Sun',color:'#f9ca24',img:'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=400&h=180&fit=crop&q=80'}
   ];
-  let votes={},currentVoter=null,selectedDest=null,confettiFired=false;
-  async function fbWrite(voter,dest){await fetch(`${DB}/${voter}.json`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(dest)});}
+  let votes={},currentVoter=null,selectedDests=new Set(),confettiFired=false;
+  async function fbWrite(voter,picks){await fetch(`${DB}/${voter}.json`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(picks)});}
   async function fbDelete(){await fetch(`${DB}.json`,{method:'DELETE'});}
   function fbListen(){
-    const dot=document.getElementById('liveDot'),label=document.getElementById('liveLabel');
+    const dot=document.getElementById('liveDot'),lbl=document.getElementById('liveLabel');
     const es=new EventSource(`${DB}.json`);
-    es.addEventListener('put',e=>{
-      const payload=JSON.parse(e.data);
-      votes=payload.data||{};
-      render();
-      dot.classList.add('connected');
-      label.textContent='Live • updates instantly';
-    });
-    es.onerror=()=>{dot.classList.remove('connected');label.textContent='Reconnecting…';};
+    es.addEventListener('put',e=>{const p=JSON.parse(e.data);votes=p.data||{};render();dot.classList.add('connected');lbl.textContent='Live • updates instantly';});
+    es.onerror=()=>{dot.classList.remove('connected');lbl.textContent='Reconnecting…';};
   }
+  function getPicks(id){const v=votes[id];if(!v)return null;return Array.isArray(v)?v:[v];}
   function render(){renderVoters();renderResults();checkWinner();}
   function renderVoters(){
     document.getElementById('votersGrid').innerHTML=VOTERS.map(v=>{
-      const voted=votes[v.id],dest=voted?DESTINATIONS.find(d=>d.id===voted):null;
+      const picks=getPicks(v.id);
+      const pills=picks?picks.map(id=>{const d=DESTINATIONS.find(x=>x.id===id);return d?`<span class="pick-pill">${d.flag} ${d.name}</span>`:''}).join(''):'<span style="color:#555;font-size:.8rem">Nothing yet</span>';
       return `<div class="voter-card" data-voter="${v.id}">
         <img class="voter-avatar" src="${v.avatar}" alt="${v.name}" onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" />
         <div class="voter-name">${v.name}</div><div class="voter-title">${v.title}</div>
-        ${voted?`<div class="vote-status voted" style="background:${v.color};color:#000;margin-bottom:10px">${dest.flag} ${dest.name}</div>`:`<div class="vote-status pending">⏳ Hasn't voted</div>`}
-        <button class="vote-btn" onclick="openModal('${v.id}')" ${voted?'disabled':''}>${voted?'✅ Voted!':'🗳️ Cast Vote'}</button>
+        <div class="picks-wrap">${pills}</div>
+        <button class="vote-btn" onclick="openModal('${v.id}')">${picks?'🗳️ Vote again':'🗳️ Cast Vote'}</button>
+        ${picks?`<button class="change-btn" onclick="openModal('${v.id}')">&#9999;&#65039; Change picks</button>`:''}
       </div>`;
     }).join('');
   }
   function renderResults(){
     const counts={};DESTINATIONS.forEach(d=>counts[d.id]=0);
-    Object.values(votes).forEach(v=>{if(counts[v]!==undefined)counts[v]++;});
-    const max=Math.max(...Object.values(counts),1),total=Object.values(votes).length;
-    document.getElementById('results').innerHTML=DESTINATIONS.map(d=>{
-      const count=counts[d.id],pct=total>0?Math.round(count/total*100):0,barW=(count/max)*100;
-      return `<div class="result-row"><div class="result-label">${d.flag} ${d.name}</div><div class="bar-track"><div class="bar-fill" style="width:${barW}%;background:${d.color}">${count>0?pct+'%':''}</div></div><div class="result-count">${count}</div></div>`;
+    Object.values(votes).forEach(v=>{const a=Array.isArray(v)?v:[v];a.forEach(id=>{if(counts[id]!==undefined)counts[id]++;});});
+    const max=Math.max(...Object.values(counts),1);
+    const sorted=[...DESTINATIONS].sort((a,b)=>counts[b.id]-counts[a.id]);
+    document.getElementById('results').innerHTML=sorted.map(d=>{
+      const c=counts[d.id],w=(c/max)*100;
+      return `<div class="result-row"><div class="result-label">${d.flag} ${d.name}</div><div class="bar-track"><div class="bar-fill" style="width:${w}%;background:${d.color}">${c>0?c:''}</div></div><div class="result-count">${c}</div></div>`;
     }).join('');
   }
   function checkWinner(){
     const ws=document.getElementById('winnerSection');
-    if(Object.keys(votes).length<VOTERS.length){ws.classList.remove('visible');return;}
-    const counts={};DESTINATIONS.forEach(d=>counts[d.id]=0);Object.values(votes).forEach(v=>counts[v]++);
-    const winnerId=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
-    const winner=DESTINATIONS.find(d=>d.id===winnerId),winCount=counts[winnerId];
-    document.getElementById('winnerName').textContent=`${winner.flag} ${winner.name} ${winner.emoji}`;
-    document.getElementById('winnerSub').textContent=`${winCount} out of 4 legends chose this. Pack your bags. WE'RE GOING TO ${winner.name.toUpperCase()}! ${winner.meme}`;
+    if(!VOTERS.every(v=>votes[v.id])){ws.classList.remove('visible');return;}
+    const counts={};DESTINATIONS.forEach(d=>counts[d.id]=0);
+    Object.values(votes).forEach(v=>{const a=Array.isArray(v)?v:[v];a.forEach(id=>{if(counts[id]!==undefined)counts[id]++;});});
+    const top=Math.max(...Object.values(counts));
+    const winners=DESTINATIONS.filter(d=>counts[d.id]===top);
+    if(winners.length===1){const w=winners[0];document.getElementById('winnerName').textContent=`${w.flag} ${w.name} ${w.emoji}`;document.getElementById('winnerSub').textContent=`${top} out of 4 legends chose this. Pack your bags — WE'RE GOING TO ${w.name.toUpperCase()}! 🎉`;}
+    else{document.getElementById('winnerName').textContent=winners.map(w=>`${w.flag} ${w.name}`).join(' vs ');document.getElementById('winnerSub').textContent=`It's a ${winners.length}-way tie at ${top} votes each. Someone needs to decide! 😂`;}
     ws.classList.add('visible');
     if(!confettiFired){confettiFired=true;launchConfetti();}
   }
   function openModal(voterId){
-    currentVoter=VOTERS.find(v=>v.id===voterId);selectedDest=null;
-    document.getElementById('confirmBtn').disabled=true;
-    document.getElementById('modalTitle').textContent=`${currentVoter.emoji} ${currentVoter.name} — where are we going, ${currentVoter.title}?`;
+    currentVoter=VOTERS.find(v=>v.id===voterId);
+    const prev=getPicks(currentVoter.id)||[];selectedDests=new Set(prev);
+    document.getElementById('modalTitle').textContent=`${currentVoter.emoji} ${currentVoter.name} — pick your top destinations`;
     document.getElementById('destGrid').innerHTML=DESTINATIONS.map(d=>`
-      <div class="dest-card" id="dest-${d.id}" onclick="selectDest('${d.id}')">
+      <div class="dest-card ${selectedDests.has(d.id)?'selected':''}" id="dest-${d.id}" onclick="toggleDest('${d.id}')">
+        <div class="dest-check">✓</div>
         <img class="dest-img" src="${d.img}" alt="${d.name}" onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" />
         <div class="dest-info"><div class="dest-name">${d.flag} ${d.name}</div><div class="dest-tag">${d.tag}</div></div>
       </div>`).join('');
+    updateConfirmBtn();
     document.getElementById('modalOverlay').classList.add('active');
   }
-  function closeModal(){document.getElementById('modalOverlay').classList.remove('active');currentVoter=null;selectedDest=null;}
-  function selectDest(destId){
-    selectedDest=destId;
-    document.querySelectorAll('.dest-card').forEach(c=>c.classList.remove('selected'));
-    document.getElementById('dest-'+destId).classList.add('selected');
-    document.getElementById('confirmBtn').disabled=false;
+  function closeModal(){document.getElementById('modalOverlay').classList.remove('active');currentVoter=null;selectedDests.clear();}
+  function toggleDest(id){
+    selectedDests.has(id)?selectedDests.delete(id):selectedDests.add(id);
+    document.getElementById('dest-'+id).classList.toggle('selected');
+    updateConfirmBtn();
+  }
+  function updateConfirmBtn(){
+    const n=selectedDests.size,btn=document.getElementById('confirmBtn');
+    btn.disabled=n===0;
+    btn.textContent=n===0?'🔒 Pick something first':`🔒 Lock in ${n} pick${n>1?'s':''}!`;
   }
   async function confirmVote(){
-    if(!currentVoter||!selectedDest)return;
+    if(!currentVoter||selectedDests.size===0)return;
     const btn=document.getElementById('confirmBtn');
     btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Saving…';
-    await fbWrite(currentVoter.id,selectedDest);
-    closeModal();btn.innerHTML='✅ Lock it in!';
+    confettiFired=false;
+    await fbWrite(currentVoter.id,Array.from(selectedDests));
+    closeModal();btn.textContent='🔒 Lock it in!';
   }
-  async function resetVotes(){
-    if(!confirm('Reset ALL votes?'))return;
-    confettiFired=false;await fbDelete();
-  }
+  async function resetVotes(){if(!confirm('Reset ALL votes?'))return;confettiFired=false;await fbDelete();}
   function launchConfetti(){
-    const colors=['#ff4757','#f9ca24','#00b894','#8e44ad','#00cec9','#6c5ce7'];
-    for(let i=0;i<120;i++)setTimeout(()=>{
+    const c=['#ff4757','#f9ca24','#00b894','#8e44ad','#00cec9','#6c5ce7','#e84393'];
+    for(let i=0;i<140;i++)setTimeout(()=>{
       const el=document.createElement('div');el.className='confetti-piece';
-      el.style.cssText=`left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*2}s;border-radius:${Math.random()>.5?'50%':'2px'}`;
+      el.style.cssText=`left:${Math.random()*100}vw;background:${c[Math.floor(Math.random()*c.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*1.5}s;border-radius:${Math.random()>.5?'50%':'2px'}`;
       document.body.appendChild(el);setTimeout(()=>el.remove(),6000);
-    },i*30);
+    },i*25);
   }
   document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target.id==='modalOverlay')closeModal();});
   fbListen();
