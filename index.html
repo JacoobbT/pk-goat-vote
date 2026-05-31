@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🦍 PK GOAT TRIP 2026 – WHERE ARE WE GOING?!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --javidia: #ff4757;
+      --vlad:    #8e44ad;
+      --ludvig:  #00b894;
+      --yakopo:  #f9ca24;
+    }
+
+    body {
+      background: #0f0f1a;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-bottom: 3px solid #222;
+    }
+    header h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #ff4757, #f9ca24, #00b894, #8e44ad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer {
+      0%,100% { filter: brightness(1); }
+      50%      { filter: brightness(1.3); }
+    }
+    header p { color: #aaa; font-size: 1.1rem; margin-top: 8px; }
+
+    .results-section { max-width: 900px; margin: 30px auto 0; padding: 0 20px; }
+    .results-section h2 { font-family: 'Fredoka One', cursive; font-size: 1.6rem; margin-bottom: 14px; color: #eee; text-align: center; }
+    .result-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .result-label { width: 130px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; }
+    .bar-track { flex: 1; height: 26px; background: #1e1e2e; border-radius: 13px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 13px; transition: width 0.6s cubic-bezier(.34,1.56,.64,1); display: flex; align-items: center; padding-left: 10px; font-size: 0.8rem; font-weight: 900; color: rgba(0,0,0,0.7); min-width: 0; }
+    .result-count { width: 30px; text-align: center; font-weight: 900; font-size: 1.1rem; }
+
+    .voters-section { max-width: 960px; margin: 36px auto; padding: 0 20px; }
+    .voters-section h2 { font-family: 'Fredoka One', cursive; font-size: 1.6rem; margin-bottom: 20px; color: #eee; text-align: center; }
+    .voters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .voter-card { background: #1a1a2e; border-radius: 20px; padding: 24px 16px; text-align: center; border: 3px solid transparent; transition: transform .2s, box-shadow .2s; cursor: default; position: relative; overflow: hidden; }
+    .voter-card[data-voter="javidia"] { border-color: var(--javidia); }
+    .voter-card[data-voter="vlad"]    { border-color: var(--vlad); }
+    .voter-card[data-voter="ludvig"]  { border-color: var(--ludvig); }
+    .voter-card[data-voter="yakopo"]  { border-color: var(--yakopo); }
+    .voter-avatar { width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 12px; display: block; object-fit: cover; border: 4px solid transparent; }
+    .voter-card[data-voter="javidia"] .voter-avatar { border-color: var(--javidia); }
+    .voter-card[data-voter="vlad"]    .voter-avatar { border-color: var(--vlad); }
+    .voter-card[data-voter="ludvig"]  .voter-avatar { border-color: var(--ludvig); }
+    .voter-card[data-voter="yakopo"]  .voter-avatar { border-color: var(--yakopo); }
+    .voter-name { font-family: 'Fredoka One', cursive; font-size: 1.3rem; }
+    .voter-title { color: #888; font-size: 0.85rem; margin-bottom: 12px; }
+    .vote-status { font-size: 0.85rem; font-weight: 700; padding: 6px 14px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+    .vote-status.pending { background: #2a2a3e; color: #666; }
+    .vote-status.voted   { color: #000; }
+    .vote-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border: none; padding: 10px 22px; border-radius: 25px; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.95rem; cursor: pointer; transition: transform .15s, box-shadow .15s; width: 100%; }
+    .vote-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,.5); }
+    .vote-btn:disabled { background: #2a2a3e; color: #555; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: #1a1a2e; border-radius: 24px; padding: 30px; width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto; border: 2px solid #333; }
+    .modal h3 { font-family: 'Fredoka One', cursive; font-size: 1.8rem; text-align: center; margin-bottom: 24px; }
+    .destinations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 16px; }
+    .dest-card { border-radius: 16px; overflow: hidden; cursor: pointer; border: 3px solid transparent; transition: transform .2s, border-color .2s, box-shadow .2s; background: #0f0f1a; }
+    .dest-card:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,255,255,.1); }
+    .dest-card.selected { border-color: #f9ca24; box-shadow: 0 0 20px rgba(249,202,36,.4); }
+    .dest-img { width: 100%; height: 110px; object-fit: cover; display: block; }
+    .dest-img-fallback { width: 100%; height: 110px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .dest-info { padding: 10px 10px 12px; }
+    .dest-name { font-family: 'Fredoka One', cursive; font-size: 1.1rem; }
+    .dest-tag  { color: #888; font-size: 0.72rem; margin-top: 2px; }
+    .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
+    .btn-confirm { background: linear-gradient(135deg, #f9ca24, #f0932b); color: #000; border: none; padding: 12px 36px; border-radius: 30px; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1rem; cursor: pointer; transition: transform .15s; }
+    .btn-confirm:hover { transform: scale(1.05); }
+    .btn-confirm:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .btn-cancel { background: #2a2a3e; color: #aaa; border: none; padding: 12px 24px; border-radius: 30px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; }
+
+    .winner-section { display: none; text-align: center; max-width: 600px; margin: 0 auto 40px; padding: 36px 24px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 24px; border: 3px solid #f9ca24; box-shadow: 0 0 60px rgba(249,202,36,.25); }
+    .winner-section.visible { display: block; }
+    .winner-section h2 { font-family: 'Fredoka One', cursive; font-size: 2.2rem; color: #f9ca24; margin-bottom: 8px; }
+    .winner-name { font-size: 3rem; font-family: 'Fredoka One', cursive; margin: 10px 0; }
+    .winner-section p { color: #aaa; }
+    .reset-btn { background: #2a2a3e; color: #aaa; border: none; padding: 10px 24px; border-radius: 20px; font-family: 'Nunito', sans-serif; font-weight: 700; cursor: pointer; margin-top: 16px; font-size: 0.9rem; }
+    .reset-btn:hover { background: #333; color: #fff; }
+
+    .confetti-piece { position: fixed; width: 10px; height: 10px; top: -10px; animation: confettiFall linear forwards; border-radius: 2px; z-index: 999; pointer-events: none; }
+    @keyframes confettiFall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🦍 PK GOAT TRIP 2026 🏆</h1>
+  <p>Four legends. Five destinations. One vote. Let's go.</p>
+</header>
+
+<div class="results-section">
+  <h2>📊 Live Scoreboard</h2>
+  <div id="results"></div>
+</div>
+
+<div class="winner-section" id="winnerSection">
+  <h2>🎉 WE HAVE A WINNER 🎉</h2>
+  <div class="winner-name" id="winnerName"></div>
+  <p id="winnerSub"></p>
+  <button class="reset-btn" onclick="resetVotes()">🔄 Reset all votes</button>
+</div>
+
+<div class="voters-section">
+  <h2>🗳️ Cast Your Vote</h2>
+  <div class="voters-grid" id="votersGrid"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitle"></h3>
+    <div class="destinations-grid" id="destGrid"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-confirm" id="confirmBtn" onclick="confirmVote()" disabled>✅ Lock it in!</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const VOTERS = [
+    { id: 'javidia', name: 'Javidia', title: 'The Gorilla', color: '#ff4757', avatar: 'https://api.dicebear.com/8.x/fun-emoji/svg?seed=gorilla&mouth=wideSmile&eyes=glasses', emoji: '🦍' },
+    { id: 'vlad',    name: 'Vlad',    title: 'The Beast',   color: '#8e44ad', avatar: 'https://api.dicebear.com/8.x/fun-emoji/svg?seed=beast666&mouth=smileTeeth&eyes=shades',  emoji: '🐉' },
+    { id: 'ludvig',  name: 'Ludvig',  title: 'The Tallman', color: '#00b894', avatar: 'https://api.dicebear.com/8.x/fun-emoji/svg?seed=tallguy&mouth=drip&eyes=cute',           emoji: '🦒' },
+    { id: 'yakopo',  name: 'Yakopo',  title: 'The Champ',   color: '#f9ca24', avatar: 'https://api.dicebear.com/8.x/fun-emoji/svg?seed=champion&mouth=lilSmile&eyes=stars',     emoji: '🏆' }
+  ];
+
+  const DESTINATIONS = [
+    { id: 'malaga',    name: 'Malaga',    flag: '🇪🇸', emoji: '🌊', tag: 'Puerto Banús • Beach clubs • Costa del Sol',  color: '#ff6b35', img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=220&fit=crop&q=80', meme: 'Señorita, another round please 💃' },
+    { id: 'athens',    name: 'Athens',    flag: '🇬🇷', emoji: '🏛️', tag: 'Rooftop bars • Ouzo • Acropolis views',        color: '#00cec9', img: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=220&fit=crop&q=80', meme: 'OPA! 🥃' },
+    { id: 'barcelona', name: 'Barcelona', flag: '🇪🇸', emoji: '🎨', tag: 'Barceloneta • Pacha • Tapas',                  color: '#6c5ce7', img: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&h=220&fit=crop&q=80', meme: 'Visca Barça 🐓' },
+    { id: 'malta',     name: 'Malta',     flag: '🇲🇹', emoji: '🏰', tag: 'Blue Lagoon • Paceville • Comino',              color: '#fdcb6e', img: 'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=400&h=220&fit=crop&q=80', meme: "Europe's hidden gem 💎" },
+    { id: 'split',     name: 'Split',     flag: '🇭🇷', emoji: '⛵', tag: 'Hvar boat parties • Old Town • Croatia',        color: '#00b894', img: 'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=220&fit=crop&q=80', meme: 'Živjeli! 🍺' }
+  ];
+
+  let votes = JSON.parse(localStorage.getItem('pkGoatVotes') || '{}');
+  let currentVoter = null;
+  let selectedDest = null;
+
+  function renderVoters() {
+    const grid = document.getElementById('votersGrid');
+    grid.innerHTML = VOTERS.map(v => {
+      const voted = votes[v.id];
+      const dest = voted ? DESTINATIONS.find(d => d.id === voted) : null;
+      return `
+        <div class="voter-card" data-voter="${v.id}">
+          <img class="voter-avatar" src="${v.avatar}" alt="${v.name}"
+               onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center;>${v.emoji}</div>'" />
+          <div class="voter-name">${v.name}</div>
+          <div class="voter-title">${v.title}</div>
+          ${voted
+            ? `<div class="vote-status voted" style="background:${v.color};margin-bottom:10px;">${dest.flag} ${dest.name}</div>`
+            : `<div class="vote-status pending">⏳ Hasn't voted</div>`
+          }
+          <button class="vote-btn" onclick="openModal('${v.id}')" ${voted ? 'disabled' : ''}>
+            ${voted ? '✅ Voted!' : '🗳️ Cast Vote'}
+          </button>
+        </div>`;
+    }).join('');
+  }
+
+  function renderResults() {
+    const counts = {};
+    DESTINATIONS.forEach(d => counts[d.id] = 0);
+    Object.values(votes).forEach(v => { if (counts[v] !== undefined) counts[v]++; });
+    const max = Math.max(...Object.values(counts), 1);
+    const totalVotes = Object.values(votes).length;
+    document.getElementById('results').innerHTML = DESTINATIONS.map(d => {
+      const count = counts[d.id];
+      const pct = totalVotes > 0 ? Math.round((count / totalVotes) * 100) : 0;
+      const barW = max > 0 ? (count / max) * 100 : 0;
+      return `
+        <div class="result-row">
+          <div class="result-label">${d.flag} ${d.name}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${barW}%;background:${d.color};">${count > 0 ? pct + '%' : ''}</div></div>
+          <div class="result-count">${count}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function checkWinner() {
+    if (Object.keys(votes).length < VOTERS.length) { document.getElementById('winnerSection').classList.remove('visible'); return; }
+    const counts = {};
+    DESTINATIONS.forEach(d => counts[d.id] = 0);
+    Object.values(votes).forEach(v => counts[v]++);
+    const winnerId = Object.entries(counts).sort((a,b) => b[1]-a[1])[0][0];
+    const winner = DESTINATIONS.find(d => d.id === winnerId);
+    const winCount = counts[winnerId];
+    document.getElementById('winnerName').textContent = `${winner.flag} ${winner.name} ${winner.emoji}`;
+    document.getElementById('winnerSub').textContent = `${winCount} out of 4 legends chose this. Pack your bags. WE'RE GOING TO ${winner.name.toUpperCase()}! ${winner.meme}`;
+    document.getElementById('winnerSection').classList.add('visible');
+    launchConfetti();
+  }
+
+  function openModal(voterId) {
+    currentVoter = VOTERS.find(v => v.id === voterId);
+    selectedDest = null;
+    document.getElementById('confirmBtn').disabled = true;
+    document.getElementById('modalTitle').textContent = `${currentVoter.emoji} ${currentVoter.name} — where are we going, ${currentVoter.title}?`;
+    renderDestCards();
+    document.getElementById('modalOverlay').classList.add('active');
+  }
+
+  function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); currentVoter = null; selectedDest = null; }
+
+  function renderDestCards() {
+    document.getElementById('destGrid').innerHTML = DESTINATIONS.map(d => `
+      <div class="dest-card" id="dest-${d.id}" onclick="selectDest('${d.id}')">
+        <img class="dest-img" src="${d.img}" alt="${d.name}" onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" />
+        <div class="dest-info">
+          <div class="dest-name">${d.flag} ${d.name}</div>
+          <div class="dest-tag">${d.tag}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  function selectDest(destId) {
+    selectedDest = destId;
+    document.querySelectorAll('.dest-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('dest-' + destId).classList.add('selected');
+    document.getElementById('confirmBtn').disabled = false;
+  }
+
+  function confirmVote() {
+    if (!currentVoter || !selectedDest) return;
+    votes[currentVoter.id] = selectedDest;
+    localStorage.setItem('pkGoatVotes', JSON.stringify(votes));
+    closeModal();
+    renderVoters();
+    renderResults();
+    checkWinner();
+  }
+
+  function resetVotes() {
+    if (!confirm('Reset ALL votes? This cannot be undone!')) return;
+    votes = {};
+    localStorage.removeItem('pkGoatVotes');
+    renderVoters();
+    renderResults();
+    document.getElementById('winnerSection').classList.remove('visible');
+  }
+
+  function launchConfetti() {
+    const colors = ['#ff4757','#f9ca24','#00b894','#8e44ad','#00cec9','#6c5ce7'];
+    for (let i = 0; i < 120; i++) {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        el.style.cssText = `left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*2}s;border-radius:${Math.random()>0.5?'50%':'2px'};`;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }, i * 30);
+    }
+  }
+
+  document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+  renderVoters();
+  renderResults();
+  checkWinner();
+</script>
+</body>
+</html>
