@@ -19,7 +19,45 @@
     .live-dot.connected { background:#00b894; box-shadow:0 0 6px #00b894; animation:pulse 1.5s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-    /* results */
+    /* ── TABS ── */
+    .tabs-bar { background:#0a0a14; padding:16px 20px 0; border-bottom:3px solid #222; }
+    .tabs-inner { max-width:960px; margin:0 auto; display:flex; gap:8px; }
+    .tab-btn {
+      flex:1; padding:14px 10px 16px; border-radius:16px 16px 0 0;
+      border:2px solid #2a2a3e; border-bottom:none;
+      background:#141428; color:#666;
+      font-family:'Fredoka One',cursive; font-size:clamp(.9rem,2.5vw,1.15rem);
+      cursor:pointer; transition:all .2s; display:flex; align-items:center;
+      justify-content:center; gap:8px; position:relative; bottom:-3px;
+      white-space:nowrap;
+    }
+    .tab-btn:hover { color:#aaa; background:#1a1a30; }
+    .tab-btn.active[data-tab="killstar"] {
+      background:linear-gradient(160deg,#2a0d14,#1a1a2e);
+      border-color:#ff4757; color:#fff;
+      box-shadow:0 -4px 20px rgba(255,71,87,.2);
+    }
+    .tab-btn.active[data-tab="vote"] {
+      background:linear-gradient(160deg,#0d0d2a,#1a1a2e);
+      border-color:#667eea; color:#fff;
+      box-shadow:0 -4px 20px rgba(102,126,234,.2);
+    }
+    .tab-badge {
+      font-size:.6rem; font-family:'Nunito',sans-serif; font-weight:900;
+      padding:2px 7px; border-radius:10px; background:#ff4757; color:#fff;
+      letter-spacing:.5px;
+    }
+    .tab-desc {
+      font-size:.72rem; font-family:'Nunito',sans-serif; color:#888;
+      display:block; margin-top:2px; font-weight:700;
+    }
+    .tab-btn.active .tab-desc { color:#bbb; }
+    .tab-btn-inner { text-align:center; }
+
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    /* ── RESULTS (shared) ── */
     .results-section { max-width:900px; margin:30px auto 0; padding:0 20px; }
     .results-section h2 { font-family:'Fredoka One',cursive; font-size:1.6rem; margin-bottom:14px; color:#eee; text-align:center; }
     .result-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
@@ -28,7 +66,29 @@
     .bar-fill { height:100%; border-radius:12px; transition:width .6s cubic-bezier(.34,1.56,.64,1); display:flex; align-items:center; padding-left:10px; font-size:.75rem; font-weight:900; color:rgba(0,0,0,.75); }
     .result-count { width:30px; text-align:center; font-weight:900; font-size:1.05rem; }
 
-    /* voters */
+    /* ── KILL & STAR SCOREBOARD ── */
+    .ks-result-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .ks-result-label { width:130px; font-weight:700; font-size:.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ks-bars { flex:1; display:flex; flex-direction:column; gap:4px; }
+    .ks-bar-row { display:flex; align-items:center; gap:6px; }
+    .ks-bar-label { font-size:.7rem; font-weight:900; width:22px; text-align:right; }
+    .ks-bar-track { flex:1; height:14px; background:#1e1e2e; border-radius:7px; overflow:hidden; }
+    .ks-bar-fill { height:100%; border-radius:7px; transition:width .6s cubic-bezier(.34,1.56,.64,1); }
+    .ks-star-fill { background:linear-gradient(90deg,#f9ca24,#f0932b); }
+    .ks-kill-fill { background:linear-gradient(90deg,#ff4757,#c0392b); }
+    .ks-counts { display:flex; flex-direction:column; gap:4px; width:28px; }
+    .ks-count { font-size:.8rem; font-weight:900; text-align:center; }
+    .ks-net { width:42px; text-align:center; }
+    .ks-net-val { font-size:.95rem; font-weight:900; padding:2px 6px; border-radius:8px; }
+    .ks-net-pos { background:rgba(249,202,36,.15); color:#f9ca24; }
+    .ks-net-neg { background:rgba(255,71,87,.15); color:#ff4757; }
+    .ks-net-zero { background:#1e1e2e; color:#666; }
+    .ks-killed-label {
+      font-size:.65rem; font-weight:900; color:#ff4757; margin-left:4px;
+      padding:1px 5px; background:rgba(255,71,87,.12); border-radius:6px;
+    }
+
+    /* ── VOTERS (shared) ── */
     .voters-section { max-width:960px; margin:36px auto; padding:0 20px; }
     .voters-section h2 { font-family:'Fredoka One',cursive; font-size:1.6rem; margin-bottom:20px; color:#eee; text-align:center; }
     .voters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
@@ -46,12 +106,16 @@
     .voter-title { color:#888; font-size:.85rem; margin-bottom:10px; }
     .picks-wrap  { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; margin-bottom:10px; min-height:28px; }
     .pick-pill   { font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:14px; background:#2a2a3e; color:#ccc; }
+    .pick-pill.star-pill { background:rgba(249,202,36,.15); color:#f9ca24; }
+    .pick-pill.kill-pill { background:rgba(255,71,87,.15); color:#ff4757; }
     .vote-btn    { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; padding:10px 22px; border-radius:25px; font-family:'Nunito',sans-serif; font-weight:900; font-size:.9rem; cursor:pointer; transition:transform .15s,box-shadow .15s; width:100%; margin-bottom:8px; }
+    .vote-btn.ks-vote-btn { background:linear-gradient(135deg,#ff4757,#8e44ad); }
     .vote-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(102,126,234,.5); }
+    .vote-btn.ks-vote-btn:hover { box-shadow:0 6px 20px rgba(255,71,87,.4); }
     .change-btn  { background:#2a2a3e; color:#aaa; border:none; padding:7px 18px; border-radius:20px; font-family:'Nunito',sans-serif; font-weight:700; font-size:.82rem; cursor:pointer; width:100%; transition:background .15s; }
     .change-btn:hover { background:#333; color:#fff; }
 
-    /* modal */
+    /* ── VOTE MODAL ── */
     .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:100; align-items:center; justify-content:center; padding:16px; }
     .modal-overlay.active { display:flex; }
     .modal { background:#1a1a2e; border-radius:24px; padding:28px; width:100%; max-width:920px; max-height:92vh; overflow-y:auto; border:2px solid #333; }
@@ -76,7 +140,47 @@
     .btn-confirm:disabled { opacity:.4; cursor:not-allowed; }
     .btn-cancel  { background:#2a2a3e; color:#aaa; border:none; padding:12px 22px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; }
 
-    /* winner */
+    /* ── KILL & STAR MODAL ── */
+    .ks-modal { border-color:#ff4757; }
+    .ks-mode-toggle { display:flex; gap:10px; margin-bottom:16px; }
+    .ks-mode-btn {
+      flex:1; padding:12px; border-radius:14px; border:2px solid #333;
+      background:#111; color:#666; font-family:'Fredoka One',cursive;
+      font-size:1.05rem; cursor:pointer; transition:all .2s;
+    }
+    .ks-mode-btn.kill-active {
+      background:linear-gradient(135deg,#2d0810,#1a1a2e);
+      border-color:#ff4757; color:#ff4757;
+      box-shadow:0 0 16px rgba(255,71,87,.25);
+    }
+    .ks-mode-btn.star-active {
+      background:linear-gradient(135deg,#2d280a,#1a1a2e);
+      border-color:#f9ca24; color:#f9ca24;
+      box-shadow:0 0 16px rgba(249,202,36,.25);
+    }
+    .ks-summary-bar {
+      display:flex; gap:12px; justify-content:center; margin-bottom:18px;
+      padding:10px 16px; background:#111; border-radius:14px; border:1px solid #222;
+    }
+    .ks-summary-item { display:flex; align-items:center; gap:6px; font-size:.9rem; font-weight:700; }
+    .ks-summary-item span { color:#888; font-size:.8rem; }
+    .ks-summary-kill { color:#ff4757; }
+    .ks-summary-star { color:#f9ca24; }
+    .dest-card.ks-kill-card { border-color:#ff4757; box-shadow:0 0 18px rgba(255,71,87,.35); }
+    .dest-card.ks-star-card { border-color:#f9ca24; box-shadow:0 0 18px rgba(249,202,36,.35); }
+    .ks-card-badge {
+      position:absolute; top:6px; right:6px; width:24px; height:24px;
+      border-radius:50%; display:none; align-items:center; justify-content:center;
+      font-size:.85rem; z-index:1;
+    }
+    .ks-kill-badge { background:#ff4757; }
+    .ks-star-badge { background:#f9ca24; top:6px; right:34px; }
+    .dest-card.ks-kill-card .ks-kill-badge { display:flex; }
+    .dest-card.ks-star-card .ks-star-badge { display:flex; }
+    .dest-card.ks-kill-card.ks-star-card .ks-kill-badge { display:flex; }
+    .dest-card.ks-kill-card.ks-star-card .ks-star-badge { display:flex; }
+
+    /* ── WINNER ── */
     .winner-section { display:none; text-align:center; max-width:640px; margin:0 auto 40px; padding:36px 24px; background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:24px; border:3px solid #f9ca24; box-shadow:0 0 60px rgba(249,202,36,.2); }
     .winner-section.visible { display:block; }
     .winner-section h2 { font-family:'Fredoka One',cursive; font-size:2rem; color:#f9ca24; margin-bottom:8px; }
@@ -95,30 +199,63 @@
 
 <header>
   <h1>🦍 PK GOAT TRIP 2026 🏆</h1>
-  <p>Four legends. Many destinations. Pick your favourites. Let's go.</p>
+  <p>Four legends. Many destinations. Kill one. Star one. Let's decide.</p>
   <div class="live-pill">
     <span class="live-dot" id="liveDot"></span>
     <span id="liveLabel">Connecting…</span>
   </div>
 </header>
 
-<div class="results-section">
-  <h2>📊 Live Scoreboard</h2>
-  <div id="results"></div>
+<!-- ── TAB BAR ── -->
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab-btn active" data-tab="killstar" onclick="switchTab('killstar')">
+      <div class="tab-btn-inner">
+        ⚔️ Kill &amp; Star
+        <span class="tab-badge">DEFAULT</span>
+        <span class="tab-desc">Kill 1 · Star 1</span>
+      </div>
+    </button>
+    <button class="tab-btn" data-tab="vote" onclick="switchTab('vote')">
+      <div class="tab-btn-inner">
+        🗳️ Multi-Vote
+        <span class="tab-desc">Pick any you like</span>
+      </div>
+    </button>
+  </div>
 </div>
 
-<div class="winner-section" id="winnerSection">
-  <h2>🎉 WE HAVE A WINNER 🎉</h2>
-  <div class="winner-name" id="winnerName"></div>
-  <p id="winnerSub"></p>
-  <button class="reset-btn" onclick="resetVotes()">🔄 Reset all votes</button>
+<!-- TAB 1 — KILL & STAR -->
+<div id="tab-killstar" class="tab-content active">
+  <div class="results-section">
+    <h2>⚔️ Kill &amp; Star Scoreboard</h2>
+    <div id="ks-results"></div>
+  </div>
+  <div class="voters-section">
+    <h2>Cast Your Kill &amp; Star</h2>
+    <div class="voters-grid" id="ksVotersGrid"></div>
+  </div>
 </div>
 
-<div class="voters-section">
-  <h2>🗳️ Cast Your Vote</h2>
-  <div class="voters-grid" id="votersGrid"></div>
+<!-- TAB 2 — MULTI-VOTE -->
+<div id="tab-vote" class="tab-content">
+  <div class="results-section">
+    <h2>📊 Live Scoreboard</h2>
+    <div id="results"></div>
+  </div>
+  <div class="winner-section" id="winnerSection">
+    <h2>🎉 WE HAVE A WINNER 🎉</h2>
+    <div class="winner-name" id="winnerName"></div>
+    <p id="winnerSub"></p>
+    <button class="reset-btn" onclick="resetVotes()">🔄 Reset all votes</button>
+  </div>
+  <div class="voters-section">
+    <h2>🗳️ Cast Your Vote</h2>
+    <div class="voters-grid" id="votersGrid"></div>
+  </div>
 </div>
 
+<!-- ── VOTE MODAL ── -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3 id="modalTitle"></h3>
@@ -131,13 +268,36 @@
   </div>
 </div>
 
+<!-- ── KILL & STAR MODAL ── -->
+<div class="modal-overlay" id="ksModalOverlay">
+  <div class="modal ks-modal">
+    <h3 id="ksModalTitle"></h3>
+    <p class="modal-sub">☠️ Kill one you hate · ⭐ Star your favourite</p>
+    <div class="ks-mode-toggle">
+      <button class="ks-mode-btn kill-active" id="ksModeKill" onclick="setKsMode('kill')">☠️ KILL MODE — click to eliminate</button>
+      <button class="ks-mode-btn" id="ksModestar" onclick="setKsMode('star')">⭐ STAR MODE — click to favourite</button>
+    </div>
+    <div class="ks-summary-bar">
+      <div class="ks-summary-item ks-summary-kill">☠️ Kill: <span id="ksSummaryKill">not set</span></div>
+      <div class="ks-summary-item" style="color:#444">|</div>
+      <div class="ks-summary-item ks-summary-star">⭐ Star: <span id="ksSummaryStar">not set</span></div>
+    </div>
+    <div class="destinations-grid" id="ksDestGrid"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeKsModal()">Cancel</button>
+      <button class="btn-confirm" id="ksConfirmBtn" onclick="confirmKsVote()" disabled>Pick something first</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  const DB = 'https://pk-vote-default-rtdb.firebaseio.com/votes';
+  const DB_VOTES = 'https://pk-vote-default-rtdb.firebaseio.com/votes';
+  const DB_KS    = 'https://pk-vote-default-rtdb.firebaseio.com/killstar';
 
   const VOTERS = [
     { id:'javidia', name:'Javidia', title:'The Gorilla', color:'#ff4757', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=gorilla&mouth=wideSmile&eyes=glasses',   emoji:'🦍' },
     { id:'vlad',    name:'Vlad',    title:'The Beast',   color:'#8e44ad', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=beast666&mouth=smileTeeth&eyes=shades', emoji:'🐉' },
-    { id:'ludvig',  name:'Ludvig',  title:'The Tallman', color:'#00b894', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=tallguy&mouth=drip&eyes=cute',          emoji:'🦒' },
+    { id:'ludvig',  name:'Ludvig',  title:'The Messi',   color:'#00b894', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=tallguy&mouth=wideSmile&eyes=stars', emoji:'⚽' },
     { id:'yakopo',  name:'Yakopo',  title:'The Champ',   color:'#f9ca24', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=champion&mouth=lilSmile&eyes=stars',    emoji:'🏆' }
   ];
 
@@ -157,197 +317,251 @@
     { id:'budapest',  name:'Budapest',  flag:'🇭🇺', emoji:'🛁', tag:'Ruin bars • Thermal baths • Danube nights',    color:'#fd79a8', img:'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=400&h=180&fit=crop&q=80' }
   ];
 
-  let votes = {};
-  let currentVoter  = null;
-  let selectedDests = new Set();
-  let confettiFired = false;
+  let votes = {}, ksVotes = {}, confettiFired = false;
+  let currentVoter = null, selectedDests = new Set();
+  let ksCurrentVoter = null, ksMode = 'kill', ksKill = null, ksStar = null;
 
-  // ── Firebase ────────────────────────────────────────────────────────
-  async function fbWrite(voter, picks) {
-    await fetch(`${DB}/${voter}.json`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(picks)
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+  }
+
+  async function fbWrite(path, voter, data) {
+    await fetch(`${path}/${voter}.json`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+  }
+  async function fbDelete(path) { await fetch(`${path}.json`, { method:'DELETE' }); }
+  function fbListen(path, onData) {
+    const es = new EventSource(`${path}.json`);
+    es.addEventListener('put', e => { const p = JSON.parse(e.data); onData(p.data || {}); });
+    return es;
+  }
+
+  let connectedCount = 0;
+  function markConnected() {
+    if (++connectedCount >= 2) {
+      document.getElementById('liveDot').classList.add('connected');
+      document.getElementById('liveLabel').textContent = 'Live • updates instantly';
+    }
+  }
+
+  function initListeners() {
+    const dot = document.getElementById('liveDot'), lbl = document.getElementById('liveLabel');
+    const es1 = fbListen(DB_VOTES, data => { votes = data; renderVoters(); renderResults(); checkWinner(); markConnected(); });
+    const es2 = fbListen(DB_KS,    data => { ksVotes = data; renderKsVoters(); renderKsResults(); markConnected(); });
+    [es1, es2].forEach(es => es.onerror = () => { dot.classList.remove('connected'); lbl.textContent = 'Reconnecting…'; connectedCount = 0; });
+  }
+
+  function getPicks(id) { const v = votes[id]; if (!v) return null; return Array.isArray(v) ? v : [v]; }
+  function getKsPick(id) { return ksVotes[id] || null; }
+  function destName(id) { const d = DESTINATIONS.find(x => x.id === id); return d ? `${d.flag} ${d.name}` : id; }
+
+  function renderKsVoters() {
+    document.getElementById('ksVotersGrid').innerHTML = VOTERS.map(v => {
+      const pick = getKsPick(v.id);
+      const infoHtml = pick
+        ? `<div class="picks-wrap">${pick.star ? `<span class="pick-pill star-pill">⭐ ${destName(pick.star)}</span>` : ''}${pick.kill ? `<span class="pick-pill kill-pill">☠️ ${destName(pick.kill)}</span>` : ''}</div>`
+        : `<div class="picks-wrap"><span style="color:#555;font-size:.8rem">Nothing yet</span></div>`;
+      return `<div class="voter-card" data-voter="${v.id}">
+        <img class="voter-avatar" src="${v.avatar}" alt="${v.name}" onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" />
+        <div class="voter-name">${v.name}</div><div class="voter-title">${v.title}</div>
+        ${infoHtml}
+        <button class="vote-btn ks-vote-btn" onclick="openKsModal('${v.id}')">${pick ? '⚔️ Change Kill &amp; Star' : '⚔️ Cast Kill &amp; Star'}</button>
+        ${pick ? `<button class="change-btn" onclick="openKsModal('${v.id}')">✏️ Change</button>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  function renderKsResults() {
+    const stars = {}, kills = {};
+    DESTINATIONS.forEach(d => { stars[d.id] = 0; kills[d.id] = 0; });
+    Object.values(ksVotes).forEach(pick => {
+      if (!pick) return;
+      if (pick.star && stars[pick.star] !== undefined) stars[pick.star]++;
+      if (pick.kill && kills[pick.kill] !== undefined) kills[pick.kill]++;
+    });
+    const maxStars = Math.max(...Object.values(stars), 1);
+    const maxKills = Math.max(...Object.values(kills), 1);
+    const sorted = [...DESTINATIONS].sort((a, b) => {
+      const netB = stars[b.id] - kills[b.id], netA = stars[a.id] - kills[a.id];
+      return netB !== netA ? netB - netA : stars[b.id] - stars[a.id];
+    });
+    document.getElementById('ks-results').innerHTML = sorted.map(d => {
+      const s = stars[d.id], k = kills[d.id], net = s - k;
+      const nc = net > 0 ? 'ks-net-pos' : net < 0 ? 'ks-net-neg' : 'ks-net-zero';
+      return `<div class="ks-result-row">
+        <div class="ks-result-label">${d.flag} ${d.name}${k > 0 ? `<span class="ks-killed-label">☠️${k}</span>` : ''}</div>
+        <div class="ks-bars">
+          <div class="ks-bar-row"><div class="ks-bar-label" style="color:#f9ca24">⭐</div><div class="ks-bar-track"><div class="ks-bar-fill ks-star-fill" style="width:${(s/maxStars)*100}%"></div></div><div class="ks-count" style="color:#f9ca24">${s}</div></div>
+          <div class="ks-bar-row"><div class="ks-bar-label" style="color:#ff4757">☠️</div><div class="ks-bar-track"><div class="ks-bar-fill ks-kill-fill" style="width:${(k/maxKills)*100}%"></div></div><div class="ks-count" style="color:#ff4757">${k}</div></div>
+        </div>
+        <div class="ks-net"><span class="ks-net-val ${nc}">${net > 0 ? '+' : ''}${net}</span></div>
+      </div>`;
+    }).join('');
+  }
+
+  function openKsModal(voterId) {
+    ksCurrentVoter = VOTERS.find(v => v.id === voterId);
+    const prev = getKsPick(ksCurrentVoter.id) || {};
+    ksKill = prev.kill || null; ksStar = prev.star || null; ksMode = 'kill';
+    document.getElementById('ksModalTitle').textContent = `${ksCurrentVoter.emoji} ${ksCurrentVoter.name} — Kill & Star`;
+    renderKsModalGrid(); updateKsModeButtons(); updateKsSummary(); updateKsConfirmBtn();
+    document.getElementById('ksModalOverlay').classList.add('active');
+  }
+
+  function renderKsModalGrid() {
+    document.getElementById('ksDestGrid').innerHTML = DESTINATIONS.map(d => {
+      const cardClass = (ksKill === d.id ? ' ks-kill-card' : '') + (ksStar === d.id ? ' ks-star-card' : '');
+      return `<div class="dest-card${cardClass}" id="ksdest-${d.id}" onclick="toggleKsDest('${d.id}')">
+        <div class="ks-card-badge ks-kill-badge">☠️</div><div class="ks-card-badge ks-star-badge">⭐</div>
+        <img class="dest-img" src="${d.img}" alt="${d.name}" onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" />
+        <div class="dest-info"><div class="dest-name">${d.flag} ${d.name}</div><div class="dest-tag">${d.tag}</div></div>
+      </div>`;
+    }).join('');
+  }
+
+  function setKsMode(mode) { ksMode = mode; updateKsModeButtons(); }
+  function updateKsModeButtons() {
+    document.getElementById('ksModeKill').className = 'ks-mode-btn' + (ksMode === 'kill' ? ' kill-active' : '');
+    document.getElementById('ksModestar').className = 'ks-mode-btn' + (ksMode === 'star' ? ' star-active' : '');
+  }
+
+  function toggleKsDest(destId) {
+    if (ksMode === 'kill') {
+      if (ksKill === destId) { ksKill = null; } else { if (ksStar === destId) ksStar = null; ksKill = destId; }
+    } else {
+      if (ksStar === destId) { ksStar = null; } else { if (ksKill === destId) ksKill = null; ksStar = destId; }
+    }
+    updateKsCardStates(); updateKsSummary(); updateKsConfirmBtn();
+  }
+
+  function updateKsCardStates() {
+    DESTINATIONS.forEach(d => {
+      const card = document.getElementById('ksdest-' + d.id);
+      if (!card) return;
+      card.classList.toggle('ks-kill-card', ksKill === d.id);
+      card.classList.toggle('ks-star-card', ksStar === d.id);
     });
   }
 
-  async function fbDelete() {
-    await fetch(`${DB}.json`, { method: 'DELETE' });
+  function updateKsSummary() {
+    document.getElementById('ksSummaryKill').textContent = ksKill ? destName(ksKill) : 'not set';
+    document.getElementById('ksSummaryStar').textContent = ksStar ? destName(ksStar) : 'not set';
   }
 
-  function fbListen() {
-    const dot = document.getElementById('liveDot');
-    const lbl = document.getElementById('liveLabel');
-    const es  = new EventSource(`${DB}.json`);
-    es.addEventListener('put', e => {
-      const payload = JSON.parse(e.data);
-      votes = payload.data || {};
-      render();
-      dot.classList.add('connected');
-      lbl.textContent = 'Live • updates instantly';
-    });
-    es.onerror = () => { dot.classList.remove('connected'); lbl.textContent = 'Reconnecting…'; };
+  function updateKsConfirmBtn() {
+    const btn = document.getElementById('ksConfirmBtn');
+    const hasAny = ksKill || ksStar, hasBoth = ksKill && ksStar;
+    btn.disabled = !hasAny;
+    btn.textContent = !hasAny ? 'Pick something first' : !hasBoth ? `💾 Save (partial — add ${!ksKill ? 'a kill' : 'a star'} too?)` : '⚔️ Lock it in!';
   }
 
-  // ── Helpers ─────────────────────────────────────────────────────────
-  function getPicks(voterId) {
-    const v = votes[voterId];
-    if (!v) return null;
-    return Array.isArray(v) ? v : [v];
+  function closeKsModal() {
+    document.getElementById('ksModalOverlay').classList.remove('active');
+    ksCurrentVoter = null; ksKill = null; ksStar = null;
   }
 
-  // ── Render ──────────────────────────────────────────────────────────
-  function render() { renderVoters(); renderResults(); checkWinner(); }
+  async function confirmKsVote() {
+    if (!ksCurrentVoter || (!ksKill && !ksStar)) return;
+    const btn = document.getElementById('ksConfirmBtn');
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Saving…';
+    await fbWrite(DB_KS, ksCurrentVoter.id, { kill: ksKill || null, star: ksStar || null });
+    closeKsModal();
+  }
 
   function renderVoters() {
     document.getElementById('votersGrid').innerHTML = VOTERS.map(v => {
       const picks = getPicks(v.id);
       const pillsHtml = picks
-        ? picks.map(id => {
-            const d = DESTINATIONS.find(x => x.id === id);
-            return d ? `<span class="pick-pill">${d.flag} ${d.name}</span>` : '';
-          }).join('')
+        ? picks.map(id => { const d = DESTINATIONS.find(x => x.id === id); return d ? `<span class="pick-pill">${d.flag} ${d.name}</span>` : ''; }).join('')
         : '<span style="color:#555;font-size:.8rem">Nothing yet</span>';
-
-      return `
-        <div class="voter-card" data-voter="${v.id}">
-          <img class="voter-avatar" src="${v.avatar}" alt="${v.name}"
-               onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" />
-          <div class="voter-name">${v.name}</div>
-          <div class="voter-title">${v.title}</div>
-          <div class="picks-wrap">${pillsHtml}</div>
-          <button class="vote-btn" onclick="openModal('${v.id}')">
-            ${picks ? '🗳️ Vote again' : '🗳️ Cast Vote'}
-          </button>
-          ${picks ? `<button class="change-btn" onclick="openModal('${v.id}')">✏️ Change picks</button>` : ''}
-        </div>`;
+      return `<div class="voter-card" data-voter="${v.id}">
+        <img class="voter-avatar" src="${v.avatar}" alt="${v.name}" onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" />
+        <div class="voter-name">${v.name}</div><div class="voter-title">${v.title}</div>
+        <div class="picks-wrap">${pillsHtml}</div>
+        <button class="vote-btn" onclick="openModal('${v.id}')">${picks ? '🗳️ Vote again' : '🗳️ Cast Vote'}</button>
+        ${picks ? `<button class="change-btn" onclick="openModal('${v.id}')">✏️ Change picks</button>` : ''}
+      </div>`;
     }).join('');
   }
 
   function renderResults() {
     const counts = {};
     DESTINATIONS.forEach(d => counts[d.id] = 0);
-    Object.values(votes).forEach(v => {
-      const arr = Array.isArray(v) ? v : [v];
-      arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; });
-    });
-
+    Object.values(votes).forEach(v => { const arr = Array.isArray(v) ? v : [v]; arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; }); });
     const maxCount = Math.max(...Object.values(counts), 1);
-    const sorted   = [...DESTINATIONS].sort((a, b) => counts[b.id] - counts[a.id]);
-
+    const sorted = [...DESTINATIONS].sort((a, b) => counts[b.id] - counts[a.id]);
     document.getElementById('results').innerHTML = sorted.map(d => {
-      const count = counts[d.id];
-      const barW  = (count / maxCount) * 100;
-      return `
-        <div class="result-row">
-          <div class="result-label">${d.flag} ${d.name}</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${barW}%;background:${d.color}">
-              ${count > 0 ? count : ''}
-            </div>
-          </div>
-          <div class="result-count">${count}</div>
-        </div>`;
+      const count = counts[d.id], barW = (count / maxCount) * 100;
+      return `<div class="result-row"><div class="result-label">${d.flag} ${d.name}</div><div class="bar-track"><div class="bar-fill" style="width:${barW}%;background:${d.color}">${count > 0 ? count : ''}</div></div><div class="result-count">${count}</div></div>`;
     }).join('');
   }
 
   function checkWinner() {
-    const ws       = document.getElementById('winnerSection');
+    const ws = document.getElementById('winnerSection');
     const allVoted = VOTERS.every(v => votes[v.id]);
     if (!allVoted) { ws.classList.remove('visible'); return; }
-
     const counts = {};
     DESTINATIONS.forEach(d => counts[d.id] = 0);
-    Object.values(votes).forEach(v => {
-      const arr = Array.isArray(v) ? v : [v];
-      arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; });
-    });
-
+    Object.values(votes).forEach(v => { const arr = Array.isArray(v) ? v : [v]; arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; }); });
     const topCount = Math.max(...Object.values(counts));
-    const winners  = DESTINATIONS.filter(d => counts[d.id] === topCount);
-
+    const winners = DESTINATIONS.filter(d => counts[d.id] === topCount);
     if (winners.length === 1) {
       const w = winners[0];
       document.getElementById('winnerName').textContent = `${w.flag} ${w.name} ${w.emoji}`;
-      document.getElementById('winnerSub').textContent  =
-        `${topCount} out of 4 legends chose this. Pack your bags — WE'RE GOING TO ${w.name.toUpperCase()}! 🎉`;
+      document.getElementById('winnerSub').textContent = `${topCount} out of 4 legends chose this. Pack your bags — WE'RE GOING TO ${w.name.toUpperCase()}! 🎉`;
     } else {
       document.getElementById('winnerName').textContent = winners.map(w => `${w.flag} ${w.name}`).join(' vs ');
-      document.getElementById('winnerSub').textContent  = `It's a ${winners.length}-way tie at ${topCount} votes each. Someone needs to make a decision! 😂`;
+      document.getElementById('winnerSub').textContent = `It's a ${winners.length}-way tie at ${topCount} votes each. Someone needs to make a decision! 😂`;
     }
-
     ws.classList.add('visible');
     if (!confettiFired) { confettiFired = true; launchConfetti(); }
   }
 
-  // ── Modal ───────────────────────────────────────────────────────────
   function openModal(voterId) {
-    currentVoter  = VOTERS.find(v => v.id === voterId);
-    const prev    = getPicks(currentVoter.id) || [];
-    selectedDests = new Set(prev);
-
-    document.getElementById('modalTitle').textContent =
-      `${currentVoter.emoji} ${currentVoter.name} — pick your top destinations`;
-
+    currentVoter = VOTERS.find(v => v.id === voterId);
+    selectedDests = new Set(getPicks(currentVoter.id) || []);
+    document.getElementById('modalTitle').textContent = `${currentVoter.emoji} ${currentVoter.name} — pick your top destinations`;
     document.getElementById('destGrid').innerHTML = DESTINATIONS.map(d => `
       <div class="dest-card ${selectedDests.has(d.id) ? 'selected' : ''}" id="dest-${d.id}" onclick="toggleDest('${d.id}')">
         <div class="dest-check">✓</div>
-        <img class="dest-img" src="${d.img}" alt="${d.name}"
-             onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" />
-        <div class="dest-info">
-          <div class="dest-name">${d.flag} ${d.name}</div>
-          <div class="dest-tag">${d.tag}</div>
-        </div>
+        <img class="dest-img" src="${d.img}" alt="${d.name}" onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" />
+        <div class="dest-info"><div class="dest-name">${d.flag} ${d.name}</div><div class="dest-tag">${d.tag}</div></div>
       </div>`).join('');
-
     updateConfirmBtn();
     document.getElementById('modalOverlay').classList.add('active');
   }
 
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('active');
-    currentVoter = null;
-    selectedDests.clear();
-  }
+  function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); currentVoter = null; selectedDests.clear(); }
 
   function toggleDest(destId) {
-    if (selectedDests.has(destId)) {
-      selectedDests.delete(destId);
-      document.getElementById('dest-' + destId).classList.remove('selected');
-    } else {
-      selectedDests.add(destId);
-      document.getElementById('dest-' + destId).classList.add('selected');
-    }
+    if (selectedDests.has(destId)) { selectedDests.delete(destId); document.getElementById('dest-'+destId).classList.remove('selected'); }
+    else { selectedDests.add(destId); document.getElementById('dest-'+destId).classList.add('selected'); }
     updateConfirmBtn();
   }
 
   function updateConfirmBtn() {
-    const n   = selectedDests.size;
-    const btn = document.getElementById('confirmBtn');
-    btn.disabled    = n === 0;
-    btn.textContent = n === 0
-      ? '🔒 Pick something first'
-      : `🔒 Lock in ${n} pick${n > 1 ? 's' : ''}!`;
+    const n = selectedDests.size, btn = document.getElementById('confirmBtn');
+    btn.disabled = n === 0;
+    btn.textContent = n === 0 ? '🔒 Pick something first' : `🔒 Lock in ${n} pick${n > 1 ? 's' : ''}!`;
   }
 
   async function confirmVote() {
     if (!currentVoter || selectedDests.size === 0) return;
     const btn = document.getElementById('confirmBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>Saving…';
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Saving…';
     confettiFired = false;
-    await fbWrite(currentVoter.id, Array.from(selectedDests));
-    closeModal();
-    btn.textContent = '🔒 Lock it in!';
+    await fbWrite(DB_VOTES, currentVoter.id, Array.from(selectedDests));
+    closeModal(); btn.textContent = '🔒 Lock it in!';
   }
 
   async function resetVotes() {
     if (!confirm('Reset ALL votes?')) return;
     confettiFired = false;
-    await fbDelete();
+    await fbDelete(DB_VOTES);
   }
 
-  // ── Confetti ────────────────────────────────────────────────────────
   function launchConfetti() {
     const colors = ['#ff4757','#f9ca24','#00b894','#8e44ad','#00cec9','#6c5ce7','#e84393'];
     for (let i = 0; i < 140; i++) {
@@ -361,11 +575,10 @@
     }
   }
 
-  document.getElementById('modalOverlay').addEventListener('click', e => {
-    if (e.target.id === 'modalOverlay') closeModal();
-  });
+  document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target.id === 'modalOverlay') closeModal(); });
+  document.getElementById('ksModalOverlay').addEventListener('click', e => { if (e.target.id === 'ksModalOverlay') closeKsModal(); });
 
-  fbListen();
+  initListeners();
 </script>
 </body>
 </html>
