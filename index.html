@@ -9,7 +9,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --javidia:#ff4757; --vlad:#8e44ad; --ludvig:#00b894; --yakopo:#f9ca24; }
     body { background:#0f0f1a; color:#fff; font-family:'Nunito',sans-serif; min-height:100vh; overflow-x:hidden; }
-
     header { text-align:center; padding:40px 20px 16px; background:linear-gradient(135deg,#1a1a2e,#16213e); border-bottom:3px solid #222; }
     header h1 { font-family:'Fredoka One',cursive; font-size:clamp(2rem,6vw,4.5rem); letter-spacing:2px; background:linear-gradient(90deg,#ff4757,#f9ca24,#00b894,#8e44ad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s infinite; }
     @keyframes shimmer { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.3)} }
@@ -18,46 +17,18 @@
     .live-dot { width:8px; height:8px; border-radius:50%; background:#555; }
     .live-dot.connected { background:#00b894; box-shadow:0 0 6px #00b894; animation:pulse 1.5s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-    /* ── TABS ── */
     .tabs-bar { background:#0a0a14; padding:16px 20px 0; border-bottom:3px solid #222; }
     .tabs-inner { max-width:960px; margin:0 auto; display:flex; gap:8px; }
-    .tab-btn {
-      flex:1; padding:14px 10px 16px; border-radius:16px 16px 0 0;
-      border:2px solid #2a2a3e; border-bottom:none;
-      background:#141428; color:#666;
-      font-family:'Fredoka One',cursive; font-size:clamp(.9rem,2.5vw,1.15rem);
-      cursor:pointer; transition:all .2s; display:flex; align-items:center;
-      justify-content:center; gap:8px; position:relative; bottom:-3px;
-      white-space:nowrap;
-    }
+    .tab-btn { flex:1; padding:14px 10px 16px; border-radius:16px 16px 0 0; border:2px solid #2a2a3e; border-bottom:none; background:#141428; color:#666; font-family:'Fredoka One',cursive; font-size:clamp(.9rem,2.5vw,1.15rem); cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:8px; position:relative; bottom:-3px; white-space:nowrap; }
     .tab-btn:hover { color:#aaa; background:#1a1a30; }
-    .tab-btn.active[data-tab="killstar"] {
-      background:linear-gradient(160deg,#2a0d14,#1a1a2e);
-      border-color:#ff4757; color:#fff;
-      box-shadow:0 -4px 20px rgba(255,71,87,.2);
-    }
-    .tab-btn.active[data-tab="vote"] {
-      background:linear-gradient(160deg,#0d0d2a,#1a1a2e);
-      border-color:#667eea; color:#fff;
-      box-shadow:0 -4px 20px rgba(102,126,234,.2);
-    }
-    .tab-badge {
-      font-size:.6rem; font-family:'Nunito',sans-serif; font-weight:900;
-      padding:2px 7px; border-radius:10px; background:#ff4757; color:#fff;
-      letter-spacing:.5px;
-    }
-    .tab-desc {
-      font-size:.72rem; font-family:'Nunito',sans-serif; color:#888;
-      display:block; margin-top:2px; font-weight:700;
-    }
+    .tab-btn.active[data-tab="killstar"] { background:linear-gradient(160deg,#2a0d14,#1a1a2e); border-color:#ff4757; color:#fff; box-shadow:0 -4px 20px rgba(255,71,87,.2); }
+    .tab-btn.active[data-tab="vote"] { background:linear-gradient(160deg,#0d0d2a,#1a1a2e); border-color:#667eea; color:#fff; box-shadow:0 -4px 20px rgba(102,126,234,.2); }
+    .tab-badge { font-size:.6rem; font-family:'Nunito',sans-serif; font-weight:900; padding:2px 7px; border-radius:10px; background:#ff4757; color:#fff; letter-spacing:.5px; }
+    .tab-desc { font-size:.72rem; font-family:'Nunito',sans-serif; color:#888; display:block; margin-top:2px; font-weight:700; }
     .tab-btn.active .tab-desc { color:#bbb; }
     .tab-btn-inner { text-align:center; }
-
     .tab-content { display:none; }
     .tab-content.active { display:block; }
-
-    /* ── RESULTS (shared) ── */
     .results-section { max-width:900px; margin:30px auto 0; padding:0 20px; }
     .results-section h2 { font-family:'Fredoka One',cursive; font-size:1.6rem; margin-bottom:14px; color:#eee; text-align:center; }
     .result-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
@@ -65,17 +36,13 @@
     .bar-track { flex:1; height:24px; background:#1e1e2e; border-radius:12px; overflow:hidden; }
     .bar-fill { height:100%; border-radius:12px; transition:width .6s cubic-bezier(.34,1.56,.64,1); display:flex; align-items:center; padding-left:10px; font-size:.75rem; font-weight:900; color:rgba(0,0,0,.75); }
     .result-count { width:30px; text-align:center; font-weight:900; font-size:1.05rem; }
-
-    /* ── KILL & STAR SCOREBOARD ── */
     .ks-score-list { max-width:680px; margin:0 auto; }
     .ks-score-row { display:flex; align-items:center; gap:12px; padding:9px 0; border-bottom:1px solid #1a1a2e; }
     .ks-score-dest { width:115px; font-weight:700; font-size:.88rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:0; }
     .ks-score-actions { display:flex; gap:5px; flex-wrap:wrap; flex:1; }
     .ks-voter-star { font-size:.72rem; font-weight:700; padding:3px 9px; border-radius:10px; background:rgba(249,202,36,.1); border:1px solid rgba(249,202,36,.25); color:#f9ca24; }
     .ks-voter-kill { font-size:.72rem; font-weight:700; padding:3px 9px; border-radius:10px; background:rgba(255,71,87,.1); border:1px solid rgba(255,71,87,.25); color:#ff4757; }
-    .ks-empty-state { text-align:center; color:#444; padding:28px; font-size:.9rem; }
-
-    /* ── VOTERS (shared) ── */
+    .ks-row-killed { opacity:.55; }
     .voters-section { max-width:960px; margin:36px auto; padding:0 20px; }
     .voters-section h2 { font-family:'Fredoka One',cursive; font-size:1.6rem; margin-bottom:20px; color:#eee; text-align:center; }
     .voters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
@@ -89,29 +56,26 @@
     .voter-card[data-voter="vlad"]    .voter-avatar { border-color:var(--vlad); }
     .voter-card[data-voter="ludvig"]  .voter-avatar { border-color:var(--ludvig); }
     .voter-card[data-voter="yakopo"]  .voter-avatar { border-color:var(--yakopo); }
-    .voter-name  { font-family:'Fredoka One',cursive; font-size:1.3rem; }
+    .voter-name { font-family:'Fredoka One',cursive; font-size:1.3rem; }
     .voter-title { color:#888; font-size:.85rem; margin-bottom:10px; }
-    .picks-wrap  { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; margin-bottom:10px; min-height:28px; }
-    .pick-pill   { font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:14px; background:#2a2a3e; color:#ccc; }
+    .picks-wrap { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; margin-bottom:10px; min-height:28px; }
+    .pick-pill { font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:14px; background:#2a2a3e; color:#ccc; }
     .pick-pill.star-pill { background:rgba(249,202,36,.15); color:#f9ca24; }
     .pick-pill.kill-pill { background:rgba(255,71,87,.15); color:#ff4757; }
-    .vote-btn    { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; padding:10px 22px; border-radius:25px; font-family:'Nunito',sans-serif; font-weight:900; font-size:.9rem; cursor:pointer; transition:transform .15s,box-shadow .15s; width:100%; margin-bottom:8px; }
+    .vote-btn { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; padding:10px 22px; border-radius:25px; font-family:'Nunito',sans-serif; font-weight:900; font-size:.9rem; cursor:pointer; transition:transform .15s,box-shadow .15s; width:100%; margin-bottom:8px; }
     .vote-btn.ks-vote-btn { background:linear-gradient(135deg,#ff4757,#8e44ad); }
     .vote-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(102,126,234,.5); }
     .vote-btn.ks-vote-btn:hover { box-shadow:0 6px 20px rgba(255,71,87,.4); }
-    .change-btn  { background:#2a2a3e; color:#aaa; border:none; padding:7px 18px; border-radius:20px; font-family:'Nunito',sans-serif; font-weight:700; font-size:.82rem; cursor:pointer; width:100%; transition:background .15s; }
+    .change-btn { background:#2a2a3e; color:#aaa; border:none; padding:7px 18px; border-radius:20px; font-family:'Nunito',sans-serif; font-weight:700; font-size:.82rem; cursor:pointer; width:100%; transition:background .15s; }
     .change-btn:hover { background:#333; color:#fff; }
-
-    /* ── VOTE MODAL ── */
     .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:100; align-items:center; justify-content:center; padding:16px; }
     .modal-overlay.active { display:flex; }
     .modal { background:#1a1a2e; border-radius:24px; padding:28px; width:100%; max-width:920px; max-height:92vh; overflow-y:auto; border:2px solid #333; }
     .modal h3 { font-family:'Fredoka One',cursive; font-size:1.6rem; text-align:center; margin-bottom:6px; }
     .modal-sub { text-align:center; color:#888; font-size:.85rem; margin-bottom:20px; }
-
     .destinations-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:12px; }
     .dest-card { border-radius:14px; overflow:hidden; cursor:pointer; border:3px solid transparent; transition:transform .18s,border-color .18s,box-shadow .18s; background:#0f0f1a; position:relative; }
-    .dest-card:hover  { transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,255,255,.08); }
+    .dest-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,255,255,.08); }
     .dest-card.selected { border-color:#f9ca24; box-shadow:0 0 18px rgba(249,202,36,.35); }
     .dest-check { position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%; background:#f9ca24; display:none; align-items:center; justify-content:center; font-size:.75rem; font-weight:900; color:#000; z-index:1; }
     .dest-card.selected .dest-check { display:flex; }
@@ -119,55 +83,30 @@
     .dest-img-fallback { width:100%; height:90px; display:flex; align-items:center; justify-content:center; font-size:2.4rem; }
     .dest-info { padding:8px 8px 10px; }
     .dest-name { font-family:'Fredoka One',cursive; font-size:1rem; }
-    .dest-tag  { color:#777; font-size:.67rem; margin-top:1px; line-height:1.3; }
-
+    .dest-tag { color:#777; font-size:.67rem; margin-top:1px; line-height:1.3; }
     .modal-actions { display:flex; gap:12px; justify-content:center; margin-top:20px; align-items:center; }
     .btn-confirm { background:linear-gradient(135deg,#f9ca24,#f0932b); color:#000; border:none; padding:12px 32px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:900; font-size:1rem; cursor:pointer; transition:transform .15s; white-space:nowrap; }
     .btn-confirm:hover:not(:disabled) { transform:scale(1.04); }
     .btn-confirm:disabled { opacity:.4; cursor:not-allowed; }
-    .btn-cancel  { background:#2a2a3e; color:#aaa; border:none; padding:12px 22px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; }
-
-    /* ── KILL & STAR MODAL ── */
+    .btn-cancel { background:#2a2a3e; color:#aaa; border:none; padding:12px 22px; border-radius:30px; font-family:'Nunito',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; }
     .ks-modal { border-color:#ff4757; }
     .ks-mode-toggle { display:flex; gap:10px; margin-bottom:16px; }
-    .ks-mode-btn {
-      flex:1; padding:12px; border-radius:14px; border:2px solid #333;
-      background:#111; color:#666; font-family:'Fredoka One',cursive;
-      font-size:1.05rem; cursor:pointer; transition:all .2s;
-    }
-    .ks-mode-btn.kill-active {
-      background:linear-gradient(135deg,#2d0810,#1a1a2e);
-      border-color:#ff4757; color:#ff4757;
-      box-shadow:0 0 16px rgba(255,71,87,.25);
-    }
-    .ks-mode-btn.star-active {
-      background:linear-gradient(135deg,#2d280a,#1a1a2e);
-      border-color:#f9ca24; color:#f9ca24;
-      box-shadow:0 0 16px rgba(249,202,36,.25);
-    }
-    .ks-summary-bar {
-      display:flex; gap:12px; justify-content:center; margin-bottom:18px;
-      padding:10px 16px; background:#111; border-radius:14px; border:1px solid #222;
-    }
+    .ks-mode-btn { flex:1; padding:12px; border-radius:14px; border:2px solid #333; background:#111; color:#666; font-family:'Fredoka One',cursive; font-size:1.05rem; cursor:pointer; transition:all .2s; }
+    .ks-mode-btn.kill-active { background:linear-gradient(135deg,#2d0810,#1a1a2e); border-color:#ff4757; color:#ff4757; box-shadow:0 0 16px rgba(255,71,87,.25); }
+    .ks-mode-btn.star-active { background:linear-gradient(135deg,#2d280a,#1a1a2e); border-color:#f9ca24; color:#f9ca24; box-shadow:0 0 16px rgba(249,202,36,.25); }
+    .ks-summary-bar { display:flex; gap:12px; justify-content:center; margin-bottom:18px; padding:10px 16px; background:#111; border-radius:14px; border:1px solid #222; }
     .ks-summary-item { display:flex; align-items:center; gap:6px; font-size:.9rem; font-weight:700; }
-    .ks-summary-item span { color:#888; font-size:.8rem; }
     .ks-summary-kill { color:#ff4757; }
     .ks-summary-star { color:#f9ca24; }
     .dest-card.ks-kill-card { border-color:#ff4757; box-shadow:0 0 18px rgba(255,71,87,.35); }
     .dest-card.ks-star-card { border-color:#f9ca24; box-shadow:0 0 18px rgba(249,202,36,.35); }
-    .ks-card-badge {
-      position:absolute; top:6px; right:6px; width:24px; height:24px;
-      border-radius:50%; display:none; align-items:center; justify-content:center;
-      font-size:.85rem; z-index:1;
-    }
+    .ks-card-badge { position:absolute; top:6px; right:6px; width:24px; height:24px; border-radius:50%; display:none; align-items:center; justify-content:center; font-size:.85rem; z-index:1; }
     .ks-kill-badge { background:#ff4757; }
     .ks-star-badge { background:#f9ca24; top:6px; right:34px; }
     .dest-card.ks-kill-card .ks-kill-badge { display:flex; }
     .dest-card.ks-star-card .ks-star-badge { display:flex; }
     .dest-card.ks-kill-card.ks-star-card .ks-kill-badge { display:flex; }
     .dest-card.ks-kill-card.ks-star-card .ks-star-badge { display:flex; }
-
-    /* ── WINNER ── */
     .winner-section { display:none; text-align:center; max-width:640px; margin:0 auto 40px; padding:36px 24px; background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:24px; border:3px solid #f9ca24; box-shadow:0 0 60px rgba(249,202,36,.2); }
     .winner-section.visible { display:block; }
     .winner-section h2 { font-family:'Fredoka One',cursive; font-size:2rem; color:#f9ca24; margin-bottom:8px; }
@@ -175,7 +114,6 @@
     .winner-section p { color:#aaa; font-size:.9rem; }
     .reset-btn { background:#2a2a3e; color:#aaa; border:none; padding:10px 24px; border-radius:20px; font-family:'Nunito',sans-serif; font-weight:700; cursor:pointer; margin-top:16px; font-size:.9rem; }
     .reset-btn:hover { background:#333; color:#fff; }
-
     .confetti-piece { position:fixed; width:10px; height:10px; top:-10px; animation:confettiFall linear forwards; border-radius:2px; z-index:999; pointer-events:none; }
     @keyframes confettiFall { to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
     .spinner { display:inline-block; width:15px; height:15px; border:2px solid #444; border-top-color:#f9ca24; border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle; margin-right:5px; }
@@ -183,603 +121,120 @@
   </style>
 </head>
 <body>
-
 <header>
   <h1>🦍 PK GOAT TRIP 2026 🏆</h1>
   <p>Four legends. Many destinations. Kill one. Star one. Let's decide.</p>
-  <div class="live-pill">
-    <span class="live-dot" id="liveDot"></span>
-    <span id="liveLabel">Connecting…</span>
-  </div>
+  <div class="live-pill"><span class="live-dot" id="liveDot"></span><span id="liveLabel">Connecting…</span></div>
 </header>
-
-<!-- ── TAB BAR ── -->
 <div class="tabs-bar">
   <div class="tabs-inner">
-    <button class="tab-btn active" data-tab="killstar" onclick="switchTab('killstar')">
-      <div class="tab-btn-inner">
-        ⚔️ Kill &amp; Star
-        <span class="tab-badge">DEFAULT</span>
-        <span class="tab-desc">Kill 1 · Star 1</span>
-      </div>
-    </button>
-    <button class="tab-btn" data-tab="vote" onclick="switchTab('vote')">
-      <div class="tab-btn-inner">
-        🗳️ Multi-Vote
-        <span class="tab-desc">Pick any you like</span>
-      </div>
-    </button>
+    <button class="tab-btn active" data-tab="killstar" onclick="switchTab('killstar')"><div class="tab-btn-inner">⚔️ Kill &amp; Star<span class="tab-badge">DEFAULT</span><span class="tab-desc">Kill 1 · Star 1</span></div></button>
+    <button class="tab-btn" data-tab="vote" onclick="switchTab('vote')"><div class="tab-btn-inner">🗳️ Multi-Vote<span class="tab-desc">Pick any you like</span></div></button>
   </div>
 </div>
-
-<!-- ══════════════════════════════════════════
-     TAB 1 — KILL & STAR
-══════════════════════════════════════════ -->
 <div id="tab-killstar" class="tab-content active">
-
-  <div class="results-section">
-    <h2>⚔️ Kill &amp; Star Scoreboard</h2>
-    <div id="ks-results"></div>
-  </div>
-
-  <div class="voters-section">
-    <h2>Cast Your Kill &amp; Star</h2>
-    <div class="voters-grid" id="ksVotersGrid"></div>
-  </div>
-
+  <div class="results-section"><h2>⚔️ Kill &amp; Star Scoreboard</h2><div id="ks-results"></div></div>
+  <div class="voters-section"><h2>Cast Your Kill &amp; Star</h2><div class="voters-grid" id="ksVotersGrid"></div></div>
 </div>
-
-<!-- ══════════════════════════════════════════
-     TAB 2 — MULTI-VOTE
-══════════════════════════════════════════ -->
 <div id="tab-vote" class="tab-content">
-
-  <div class="results-section">
-    <h2>📊 Live Scoreboard</h2>
-    <div id="results"></div>
-  </div>
-
-  <div class="winner-section" id="winnerSection">
-    <h2>🎉 WE HAVE A WINNER 🎉</h2>
-    <div class="winner-name" id="winnerName"></div>
-    <p id="winnerSub"></p>
-    <button class="reset-btn" onclick="resetVotes()">🔄 Reset all votes</button>
-  </div>
-
-  <div class="voters-section">
-    <h2>🗳️ Cast Your Vote</h2>
-    <div class="voters-grid" id="votersGrid"></div>
-  </div>
-
+  <div class="results-section"><h2>📊 Live Scoreboard</h2><div id="results"></div></div>
+  <div class="winner-section" id="winnerSection"><h2>🎉 WE HAVE A WINNER 🎉</h2><div class="winner-name" id="winnerName"></div><p id="winnerSub"></p><button class="reset-btn" onclick="resetVotes()">🔄 Reset all votes</button></div>
+  <div class="voters-section"><h2>🗳️ Cast Your Vote</h2><div class="voters-grid" id="votersGrid"></div></div>
 </div>
-
-<!-- ── VOTE MODAL ── -->
 <div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <h3 id="modalTitle"></h3>
-    <p class="modal-sub">Tap to pick one or more destinations, then lock it in.</p>
-    <div class="destinations-grid" id="destGrid"></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-confirm" id="confirmBtn" onclick="confirmVote()" disabled>🔒 Pick something first</button>
-    </div>
-  </div>
+  <div class="modal"><h3 id="modalTitle"></h3><p class="modal-sub">Tap to pick one or more destinations, then lock it in.</p><div class="destinations-grid" id="destGrid"></div>
+  <div class="modal-actions"><button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-confirm" id="confirmBtn" onclick="confirmVote()" disabled>🔒 Pick something first</button></div></div>
 </div>
-
-<!-- ── KILL & STAR MODAL ── -->
 <div class="modal-overlay" id="ksModalOverlay">
-  <div class="modal ks-modal">
-    <h3 id="ksModalTitle"></h3>
-    <p class="modal-sub">☠️ Kill one you hate · ⭐ Star your favourite</p>
-
-    <div class="ks-mode-toggle">
-      <button class="ks-mode-btn kill-active" id="ksModeKill" onclick="setKsMode('kill')">☠️ KILL MODE — click to eliminate</button>
-      <button class="ks-mode-btn" id="ksModestar" onclick="setKsMode('star')">⭐ STAR MODE — click to favourite</button>
-    </div>
-
-    <div class="ks-summary-bar">
-      <div class="ks-summary-item ks-summary-kill">☠️ Kill: <span id="ksSummaryKill">not set</span></div>
-      <div class="ks-summary-item" style="color:#444">|</div>
-      <div class="ks-summary-item ks-summary-star">⭐ Star: <span id="ksSummaryStar">not set</span></div>
-    </div>
-
-    <div class="destinations-grid" id="ksDestGrid"></div>
-
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeKsModal()">Cancel</button>
-      <button class="btn-confirm" id="ksConfirmBtn" onclick="confirmKsVote()" disabled>Pick something first</button>
-    </div>
-  </div>
+  <div class="modal ks-modal"><h3 id="ksModalTitle"></h3><p class="modal-sub">☠️ Kill one you hate · ⭐ Star your favourite</p>
+  <div class="ks-mode-toggle"><button class="ks-mode-btn kill-active" id="ksModeKill" onclick="setKsMode('kill')">☠️ KILL MODE — click to eliminate</button><button class="ks-mode-btn" id="ksModestar" onclick="setKsMode('star')">⭐ STAR MODE — click to favourite</button></div>
+  <div class="ks-summary-bar"><div class="ks-summary-item ks-summary-kill">☠️ Kill: <span id="ksSummaryKill">not set</span></div><div class="ks-summary-item" style="color:#444">|</div><div class="ks-summary-item ks-summary-star">⭐ Star: <span id="ksSummaryStar">not set</span></div></div>
+  <div class="destinations-grid" id="ksDestGrid"></div>
+  <div class="modal-actions"><button class="btn-cancel" onclick="closeKsModal()">Cancel</button><button class="btn-confirm" id="ksConfirmBtn" onclick="confirmKsVote()" disabled>Pick something first</button></div></div>
 </div>
-
 <script>
-  const DB_VOTES = 'https://pk-vote-default-rtdb.firebaseio.com/votes';
-  const DB_KS    = 'https://pk-vote-default-rtdb.firebaseio.com/killstar';
-
-  const VOTERS = [
-    { id:'javidia', name:'Javidia', title:'The Gorilla', color:'#ff4757', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=gorilla&mouth=wideSmile&eyes=glasses',   emoji:'🦍' },
-    { id:'vlad',    name:'Vlad',    title:'The Beast',   color:'#8e44ad', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=beast666&mouth=smileTeeth&eyes=shades', emoji:'🐉' },
-    { id:'ludvig',  name:'Ludvig',  title:'The Messi',   color:'#00b894', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=tallguy&mouth=wideSmile&eyes=stars', emoji:'⚽' },
-    { id:'yakopo',  name:'Yakopo',  title:'The Champ',   color:'#f9ca24', avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=champion&mouth=lilSmile&eyes=stars',    emoji:'🏆' }
+  const DB_VOTES='https://pk-vote-default-rtdb.firebaseio.com/votes';
+  const DB_KS='https://pk-vote-default-rtdb.firebaseio.com/killstar';
+  const VOTERS=[
+    {id:'javidia',name:'Javidia',title:'The Gorilla',color:'#ff4757',avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=gorilla&mouth=wideSmile&eyes=glasses',emoji:'🦍'},
+    {id:'vlad',name:'Vlad',title:'The Beast',color:'#8e44ad',avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=beast666&mouth=smileTeeth&eyes=shades',emoji:'🐉'},
+    {id:'ludvig',name:'Ludvig',title:'The Messi',color:'#00b894',avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=tallguy&mouth=wideSmile&eyes=stars',emoji:'⚽'},
+    {id:'yakopo',name:'Yakopo',title:'The Champ',color:'#f9ca24',avatar:'https://api.dicebear.com/8.x/fun-emoji/svg?seed=champion&mouth=lilSmile&eyes=stars',emoji:'🏆'}
   ];
-
-  const DESTINATIONS = [
-    { id:'barcelona', name:'Barcelona', flag:'🇪🇸', emoji:'🎨', tag:'Barceloneta • Pacha • Tapas',                 color:'#6c5ce7', img:'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&h=180&fit=crop&q=80' },
-    { id:'ibiza',     name:'Ibiza',     flag:'🇪🇸', emoji:'🎉', tag:'Ushuaïa • Pacha • Boat parties',              color:'#e84393', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=180&fit=crop&q=80' },
-    { id:'malta',     name:'Malta',     flag:'🇲🇹', emoji:'🏰', tag:'Blue Lagoon • Paceville • Comino',             color:'#fdcb6e', img:'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=400&h=180&fit=crop&q=80' },
-    { id:'malaga',    name:'Malaga',    flag:'🇪🇸', emoji:'🌊', tag:'Puerto Banús • Beach clubs • Costa del Sol',  color:'#ff6b35', img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=180&fit=crop&q=80' },
-    { id:'prague',    name:'Prague',    flag:'🇨🇿', emoji:'🍺', tag:'Beer capital • Old Town • Nightlife',          color:'#a29bfe', img:'https://images.unsplash.com/photo-1541849546-216549ae216d?w=400&h=180&fit=crop&q=80' },
-    { id:'gdansk',    name:'Gdańsk',    flag:'🇵🇱', emoji:'⚓', tag:'Baltic beaches • Vodka • Old town',            color:'#74b9ff', img:'https://images.unsplash.com/photo-1569396116180-90b531757dce?w=400&h=180&fit=crop&q=80' },
-    { id:'krakow',    name:'Kraków',    flag:'🇵🇱', emoji:'🏰', tag:'Cheapest party city in Europe',               color:'#55efc4', img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=180&fit=crop&q=80' },
-    { id:'split',     name:'Split',     flag:'🇭🇷', emoji:'⛵', tag:'Hvar boat parties • Old Town • Croatia',       color:'#00b894', img:'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=180&fit=crop&q=80' },
-    { id:'athens',    name:'Athens',    flag:'🇬🇷', emoji:'🏛️', tag:'Rooftop bars • Ouzo • Acropolis',              color:'#00cec9', img:'https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=180&fit=crop&q=80' },
-    { id:'mykonos',   name:'Mykonos',   flag:'🇬🇷', emoji:'🌬️', tag:'Paradise Beach • Windmills • Glamour',        color:'#fd79a8', img:'https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=180&fit=crop&q=80' },
-    { id:'dubrovnik', name:'Dubrovnik', flag:'🇭🇷', emoji:'🏯', tag:'Game of Thrones • Old walls • Adriatic',       color:'#e17055', img:'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=180&fit=crop&q=80' },
-    { id:'rhodes',    name:'Rhodes',    flag:'🇬🇷', emoji:'☀️', tag:'Faliraki strip • Ancient city • Sun',          color:'#ffeaa7', img:'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=400&h=180&fit=crop&q=80' },
-    { id:'budapest',  name:'Budapest',  flag:'🇭🇺', emoji:'🛁', tag:'Ruin bars • Thermal baths • Danube nights',    color:'#fd79a8', img:'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=400&h=180&fit=crop&q=80' }
+  const DESTINATIONS=[
+    {id:'barcelona',name:'Barcelona',flag:'🇪🇸',emoji:'🎨',tag:'Barceloneta • Pacha • Tapas',color:'#6c5ce7',img:'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&h=180&fit=crop&q=80'},
+    {id:'ibiza',name:'Ibiza',flag:'🇪🇸',emoji:'🎉',tag:'Ushuaïa • Pacha • Boat parties',color:'#e84393',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=180&fit=crop&q=80'},
+    {id:'malta',name:'Malta',flag:'🇲🇹',emoji:'🏰',tag:'Blue Lagoon • Paceville • Comino',color:'#fdcb6e',img:'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=400&h=180&fit=crop&q=80'},
+    {id:'malaga',name:'Malaga',flag:'🇪🇸',emoji:'🌊',tag:'Puerto Banús • Beach clubs • Costa del Sol',color:'#ff6b35',img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=180&fit=crop&q=80'},
+    {id:'prague',name:'Prague',flag:'🇨🇿',emoji:'🍺',tag:'Beer capital • Old Town • Nightlife',color:'#a29bfe',img:'https://images.unsplash.com/photo-1541849546-216549ae216d?w=400&h=180&fit=crop&q=80'},
+    {id:'gdansk',name:'Gdańsk',flag:'🇵🇱',emoji:'⚓',tag:'Baltic beaches • Vodka • Old town',color:'#74b9ff',img:'https://images.unsplash.com/photo-1569396116180-90b531757dce?w=400&h=180&fit=crop&q=80'},
+    {id:'krakow',name:'Kraków',flag:'🇵🇱',emoji:'🏰',tag:'Cheapest party city in Europe',color:'#55efc4',img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=180&fit=crop&q=80'},
+    {id:'split',name:'Split',flag:'🇭🇷',emoji:'⛵',tag:'Hvar boat parties • Old Town • Croatia',color:'#00b894',img:'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=180&fit=crop&q=80'},
+    {id:'athens',name:'Athens',flag:'🇬🇷',emoji:'🏛️',tag:'Rooftop bars • Ouzo • Acropolis',color:'#00cec9',img:'https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=180&fit=crop&q=80'},
+    {id:'mykonos',name:'Mykonos',flag:'🇬🇷',emoji:'🌬️',tag:'Paradise Beach • Windmills • Glamour',color:'#fd79a8',img:'https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=180&fit=crop&q=80'},
+    {id:'dubrovnik',name:'Dubrovnik',flag:'🇭🇷',emoji:'🏯',tag:'Game of Thrones • Old walls • Adriatic',color:'#e17055',img:'https://images.unsplash.com/photo-1555986960-9fa44e07b977?w=400&h=180&fit=crop&q=80'},
+    {id:'rhodes',name:'Rhodes',flag:'🇬🇷',emoji:'☀️',tag:'Faliraki strip • Ancient city • Sun',color:'#ffeaa7',img:'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=400&h=180&fit=crop&q=80'},
+    {id:'budapest',name:'Budapest',flag:'🇭🇺',emoji:'🛁',tag:'Ruin bars • Thermal baths • Danube nights',color:'#fd79a8',img:'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=400&h=180&fit=crop&q=80'}
   ];
-
-  // ── State ────────────────────────────────────────────────────────────
-  let votes       = {};
-  let ksVotes     = {};   // { voterId: { kill: destId|null, star: destId|null } }
-  let confettiFired = false;
-
-  // multi-vote modal
-  let currentVoter  = null;
-  let selectedDests = new Set();
-
-  // kill & star modal
-  let ksCurrentVoter = null;
-  let ksMode         = 'kill';
-  let ksKill         = null;
-  let ksStar         = null;
-
-  // ── Tab switching ────────────────────────────────────────────────────
-  function switchTab(tab) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById('tab-' + tab).classList.add('active');
-    document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
-  }
-
-  // ── Firebase helpers ─────────────────────────────────────────────────
-  async function fbWrite(path, voter, data) {
-    await fetch(`${path}/${voter}.json`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-  }
-
-  async function fbDelete(path) {
-    await fetch(`${path}.json`, { method: 'DELETE' });
-  }
-
-  function fbListen(path, onData) {
-    const es = new EventSource(`${path}.json`);
-    es.addEventListener('put', e => {
-      const payload = JSON.parse(e.data);
-      onData(payload.data || {});
-    });
-    return es;
-  }
-
-  // ── Live listeners ───────────────────────────────────────────────────
-  let connectedCount = 0;
-  function markConnected() {
-    connectedCount++;
-    if (connectedCount >= 2) {
-      document.getElementById('liveDot').classList.add('connected');
-      document.getElementById('liveLabel').textContent = 'Live • updates instantly';
-    }
-  }
-
-  function initListeners() {
-    const dot = document.getElementById('liveDot');
-    const lbl = document.getElementById('liveLabel');
-
-    const es1 = fbListen(DB_VOTES, data => {
-      votes = data;
-      renderVoters();
-      renderResults();
-      checkWinner();
-      markConnected();
-    });
-
-    const es2 = fbListen(DB_KS, data => {
-      ksVotes = data;
-      renderKsVoters();
-      renderKsResults();
-      markConnected();
-    });
-
-    [es1, es2].forEach(es => {
-      es.onerror = () => {
-        dot.classList.remove('connected');
-        lbl.textContent = 'Reconnecting…';
-        connectedCount = 0;
-      };
-    });
-  }
-
-  // ── Helpers ──────────────────────────────────────────────────────────
-  function getPicks(voterId) {
-    const v = votes[voterId];
-    if (!v) return null;
-    return Array.isArray(v) ? v : [v];
-  }
-
-  function getKsPick(voterId) {
-    return ksVotes[voterId] || null;
-  }
-
-  function destName(id) {
-    const d = DESTINATIONS.find(x => x.id === id);
-    return d ? `${d.flag} ${d.name}` : id;
-  }
-
-  // ── ═══════════════════════════════════════════════════════════════
-  //    KILL & STAR RENDERING
-  // ── ═══════════════════════════════════════════════════════════════
-
-  function renderKsVoters() {
-    document.getElementById('ksVotersGrid').innerHTML = VOTERS.map(v => {
-      const pick = getKsPick(v.id);
-      let infoHtml;
-      if (pick) {
-        infoHtml = `
-          <div class="picks-wrap">
-            ${pick.star ? `<span class="pick-pill star-pill">⭐ ${destName(pick.star)}</span>` : ''}
-            ${pick.kill ? `<span class="pick-pill kill-pill">☠️ ${destName(pick.kill)}</span>` : ''}
-          </div>`;
-      } else {
-        infoHtml = `<div class="picks-wrap"><span style="color:#555;font-size:.8rem">Nothing yet</span></div>`;
-      }
-
-      return `
-        <div class="voter-card" data-voter="${v.id}">
-          <img class="voter-avatar" src="${v.avatar}" alt="${v.name}"
-               onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" />
-          <div class="voter-name">${v.name}</div>
-          <div class="voter-title">${v.title}</div>
-          ${infoHtml}
-          <button class="vote-btn ks-vote-btn" onclick="openKsModal('${v.id}')">
-            ${pick ? '⚔️ Change Kill &amp; Star' : '⚔️ Cast Kill &amp; Star'}
-          </button>
-          ${pick ? `<button class="change-btn" onclick="openKsModal('${v.id}')">✏️ Change</button>` : ''}
-        </div>`;
+  let votes={},ksVotes={},confettiFired=false;
+  let currentVoter=null,selectedDests=new Set();
+  let ksCurrentVoter=null,ksMode='kill',ksKill=null,ksStar=null;
+  function switchTab(tab){document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+tab).classList.add('active');document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');}
+  async function fbWrite(path,voter,data){await fetch(`${path}/${voter}.json`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});}
+  async function fbDelete(path){await fetch(`${path}.json`,{method:'DELETE'});}
+  function fbListen(path,onData){const es=new EventSource(`${path}.json`);es.addEventListener('put',e=>{const p=JSON.parse(e.data);onData(p.data||{});});return es;}
+  let connectedCount=0;
+  function markConnected(){if(++connectedCount>=2){document.getElementById('liveDot').classList.add('connected');document.getElementById('liveLabel').textContent='Live • updates instantly';}}
+  function initListeners(){const dot=document.getElementById('liveDot'),lbl=document.getElementById('liveLabel');const es1=fbListen(DB_VOTES,data=>{votes=data;renderVoters();renderResults();checkWinner();markConnected();});const es2=fbListen(DB_KS,data=>{ksVotes=data;renderKsVoters();renderKsResults();markConnected();});[es1,es2].forEach(es=>es.onerror=()=>{dot.classList.remove('connected');lbl.textContent='Reconnecting…';connectedCount=0;});}
+  function getPicks(id){const v=votes[id];if(!v)return null;return Array.isArray(v)?v:[v];}
+  function getKsPick(id){return ksVotes[id]||null;}
+  function destName(id){const d=DESTINATIONS.find(x=>x.id===id);return d?`${d.flag} ${d.name}`:id;}
+  function renderKsVoters(){
+    document.getElementById('ksVotersGrid').innerHTML=VOTERS.map(v=>{
+      const pick=getKsPick(v.id);
+      const info=pick?`<div class="picks-wrap">${pick.star?`<span class="pick-pill star-pill">⭐ ${destName(pick.star)}</span>`:''} ${pick.kill?`<span class="pick-pill kill-pill">☠️ ${destName(pick.kill)}</span>`:''}</div>`:`<div class="picks-wrap"><span style="color:#555;font-size:.8rem">Nothing yet</span></div>`;
+      return `<div class="voter-card" data-voter="${v.id}"><img class="voter-avatar" src="${v.avatar}" alt="${v.name}" onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" /><div class="voter-name">${v.name}</div><div class="voter-title">${v.title}</div>${info}<button class="vote-btn ks-vote-btn" onclick="openKsModal('${v.id}')">${pick?'⚔️ Change Kill &amp; Star':'⚔️ Cast Kill &amp; Star'}</button>${pick?`<button class="change-btn" onclick="openKsModal('${v.id}')">✏️ Change</button>`:''}</div>`;
     }).join('');
   }
-
-  function renderKsResults() {
-    const stars = {}, kills = {};
-    DESTINATIONS.forEach(d => { stars[d.id] = []; kills[d.id] = []; });
-
-    Object.entries(ksVotes).forEach(([voterId, pick]) => {
-      if (!pick) return;
-      if (pick.star && stars[pick.star]) stars[pick.star].push(voterId);
-      if (pick.kill && kills[pick.kill]) kills[pick.kill].push(voterId);
+  function renderKsResults(){
+    const stars={},kills={};
+    DESTINATIONS.forEach(d=>{stars[d.id]=[];kills[d.id]=[];});
+    Object.entries(ksVotes).forEach(([vid,pick])=>{if(!pick)return;if(pick.star&&stars[pick.star])stars[pick.star].push(vid);if(pick.kill&&kills[pick.kill])kills[pick.kill].push(vid);});
+    const sorted=[...DESTINATIONS].sort((a,b)=>{
+      const aK=kills[a.id].length>0,bK=kills[b.id].length>0;
+      if(aK!==bK)return aK?1:-1;
+      if(aK&&bK)return(kills[a.id].length-kills[b.id].length)||(stars[b.id].length-stars[a.id].length);
+      return stars[b.id].length-stars[a.id].length;
     });
-
-    const sorted = [...DESTINATIONS].sort((a, b) => {
-      const netB = stars[b.id].length - kills[b.id].length;
-      const netA = stars[a.id].length - kills[a.id].length;
-      return netB !== netA ? netB - netA : stars[b.id].length - stars[a.id].length;
-    });
-
-    const active = sorted.filter(d => stars[d.id].length > 0 || kills[d.id].length > 0);
-
-    if (active.length === 0) {
-      document.getElementById('ks-results').innerHTML = '<p class="ks-empty-state">No votes yet — be the first!</p>';
-      return;
-    }
-
-    document.getElementById('ks-results').innerHTML = `<div class="ks-score-list">${
-      active.map(d => {
-        const starPills = stars[d.id].map(vid => {
-          const v = VOTERS.find(x => x.id === vid);
-          return `<span class="ks-voter-star">⭐ ${v ? v.name : vid}</span>`;
-        }).join('');
-        const killPills = kills[d.id].map(vid => {
-          const v = VOTERS.find(x => x.id === vid);
-          return `<span class="ks-voter-kill">☠️ ${v ? v.name : vid}</span>`;
-        }).join('');
-        return `<div class="ks-score-row">
-          <div class="ks-score-dest">${d.flag} ${d.name}</div>
-          <div class="ks-score-actions">${starPills}${killPills}</div>
-        </div>`;
-      }).join('')
-    }</div>`;
+    document.getElementById('ks-results').innerHTML=`<div class="ks-score-list">${sorted.map(d=>{
+      const killed=kills[d.id].length>0;
+      const sp=stars[d.id].map(vid=>{const v=VOTERS.find(x=>x.id===vid);return `<span class="ks-voter-star">⭐ ${v?v.name:vid}</span>`;}).join('');
+      const kp=kills[d.id].map(vid=>{const v=VOTERS.find(x=>x.id===vid);return `<span class="ks-voter-kill">☠️ ${v?v.name:vid}</span>`;}).join('');
+      return `<div class="ks-score-row${killed?' ks-row-killed':''}"><div class="ks-score-dest">${d.flag} ${d.name}</div><div class="ks-score-actions">${sp}${kp}</div></div>`;
+    }).join('')}</div>`;
   }
-
-  // ── KILL & STAR MODAL ─────────────────────────────────────────────────
-  function openKsModal(voterId) {
-    ksCurrentVoter = VOTERS.find(v => v.id === voterId);
-    const prev = getKsPick(ksCurrentVoter.id) || {};
-    ksKill = prev.kill || null;
-    ksStar = prev.star || null;
-    ksMode = 'kill';
-
-    document.getElementById('ksModalTitle').textContent =
-      `${ksCurrentVoter.emoji} ${ksCurrentVoter.name} — Kill &amp; Star`;
-
-    renderKsModalGrid();
-    updateKsModeButtons();
-    updateKsSummary();
-    updateKsConfirmBtn();
-    document.getElementById('ksModalOverlay').classList.add('active');
-  }
-
-  function renderKsModalGrid() {
-    document.getElementById('ksDestGrid').innerHTML = DESTINATIONS.map(d => {
-      const isKill = ksKill === d.id;
-      const isStar = ksStar === d.id;
-      const cardClass = (isKill ? ' ks-kill-card' : '') + (isStar ? ' ks-star-card' : '');
-      return `
-        <div class="dest-card${cardClass}" id="ksdest-${d.id}" onclick="toggleKsDest('${d.id}')">
-          <div class="ks-card-badge ks-kill-badge">☠️</div>
-          <div class="ks-card-badge ks-star-badge">⭐</div>
-          <img class="dest-img" src="${d.img}" alt="${d.name}"
-               onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" />
-          <div class="dest-info">
-            <div class="dest-name">${d.flag} ${d.name}</div>
-            <div class="dest-tag">${d.tag}</div>
-          </div>
-        </div>`;
-    }).join('');
-  }
-
-  function setKsMode(mode) {
-    ksMode = mode;
-    updateKsModeButtons();
-  }
-
-  function updateKsModeButtons() {
-    const killBtn = document.getElementById('ksModeKill');
-    const starBtn = document.getElementById('ksModestar');
-    killBtn.className = 'ks-mode-btn' + (ksMode === 'kill' ? ' kill-active' : '');
-    starBtn.className = 'ks-mode-btn' + (ksMode === 'star' ? ' star-active' : '');
-  }
-
-  function toggleKsDest(destId) {
-    if (ksMode === 'kill') {
-      if (ksKill === destId) {
-        ksKill = null;
-      } else {
-        if (ksStar === destId) ksStar = null;
-        ksKill = destId;
-      }
-    } else {
-      if (ksStar === destId) {
-        ksStar = null;
-      } else {
-        if (ksKill === destId) ksKill = null;
-        ksStar = destId;
-      }
-    }
-    updateKsCardStates();
-    updateKsSummary();
-    updateKsConfirmBtn();
-  }
-
-  function updateKsCardStates() {
-    DESTINATIONS.forEach(d => {
-      const card = document.getElementById('ksdest-' + d.id);
-      if (!card) return;
-      card.classList.toggle('ks-kill-card', ksKill === d.id);
-      card.classList.toggle('ks-star-card', ksStar === d.id);
-    });
-  }
-
-  function updateKsSummary() {
-    document.getElementById('ksSummaryKill').textContent = ksKill ? destName(ksKill) : 'not set';
-    document.getElementById('ksSummaryStar').textContent = ksStar ? destName(ksStar) : 'not set';
-  }
-
-  function updateKsConfirmBtn() {
-    const btn = document.getElementById('ksConfirmBtn');
-    const hasAny = ksKill || ksStar;
-    const hasBoth = ksKill && ksStar;
-    btn.disabled = !hasAny;
-    if (!hasAny) {
-      btn.textContent = 'Pick something first';
-    } else if (!hasBoth) {
-      btn.textContent = `💾 Save (partial — add ${!ksKill ? 'a kill' : 'a star'} too?)`;
-    } else {
-      btn.textContent = `⚔️ Lock it in!`;
-    }
-  }
-
-  function closeKsModal() {
-    document.getElementById('ksModalOverlay').classList.remove('active');
-    ksCurrentVoter = null;
-    ksKill = null;
-    ksStar = null;
-  }
-
-  async function confirmKsVote() {
-    if (!ksCurrentVoter || (!ksKill && !ksStar)) return;
-    const btn = document.getElementById('ksConfirmBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>Saving…';
-    await fbWrite(DB_KS, ksCurrentVoter.id, { kill: ksKill || null, star: ksStar || null });
-    closeKsModal();
-  }
-
-  // ── ═══════════════════════════════════════════════════════════════
-  //    MULTI-VOTE RENDERING
-  // ── ═══════════════════════════════════════════════════════════════
-
-  function renderVoters() {
-    document.getElementById('votersGrid').innerHTML = VOTERS.map(v => {
-      const picks = getPicks(v.id);
-      const pillsHtml = picks
-        ? picks.map(id => {
-            const d = DESTINATIONS.find(x => x.id === id);
-            return d ? `<span class="pick-pill">${d.flag} ${d.name}</span>` : '';
-          }).join('')
-        : '<span style="color:#555;font-size:.8rem">Nothing yet</span>';
-
-      return `
-        <div class="voter-card" data-voter="${v.id}">
-          <img class="voter-avatar" src="${v.avatar}" alt="${v.name}"
-               onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" />
-          <div class="voter-name">${v.name}</div>
-          <div class="voter-title">${v.title}</div>
-          <div class="picks-wrap">${pillsHtml}</div>
-          <button class="vote-btn" onclick="openModal('${v.id}')">
-            ${picks ? '🗳️ Vote again' : '🗳️ Cast Vote'}
-          </button>
-          ${picks ? `<button class="change-btn" onclick="openModal('${v.id}')">✏️ Change picks</button>` : ''}
-        </div>`;
-    }).join('');
-  }
-
-  function renderResults() {
-    const counts = {};
-    DESTINATIONS.forEach(d => counts[d.id] = 0);
-    Object.values(votes).forEach(v => {
-      const arr = Array.isArray(v) ? v : [v];
-      arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; });
-    });
-
-    const maxCount = Math.max(...Object.values(counts), 1);
-    const sorted   = [...DESTINATIONS].sort((a, b) => counts[b.id] - counts[a.id]);
-
-    document.getElementById('results').innerHTML = sorted.map(d => {
-      const count = counts[d.id];
-      const barW  = (count / maxCount) * 100;
-      return `
-        <div class="result-row">
-          <div class="result-label">${d.flag} ${d.name}</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${barW}%;background:${d.color}">
-              ${count > 0 ? count : ''}
-            </div>
-          </div>
-          <div class="result-count">${count}</div>
-        </div>`;
-    }).join('');
-  }
-
-  function checkWinner() {
-    const ws       = document.getElementById('winnerSection');
-    const allVoted = VOTERS.every(v => votes[v.id]);
-    if (!allVoted) { ws.classList.remove('visible'); return; }
-
-    const counts = {};
-    DESTINATIONS.forEach(d => counts[d.id] = 0);
-    Object.values(votes).forEach(v => {
-      const arr = Array.isArray(v) ? v : [v];
-      arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; });
-    });
-
-    const topCount = Math.max(...Object.values(counts));
-    const winners  = DESTINATIONS.filter(d => counts[d.id] === topCount);
-
-    if (winners.length === 1) {
-      const w = winners[0];
-      document.getElementById('winnerName').textContent = `${w.flag} ${w.name} ${w.emoji}`;
-      document.getElementById('winnerSub').textContent  =
-        `${topCount} out of 4 legends chose this. Pack your bags — WE'RE GOING TO ${w.name.toUpperCase()}! 🎉`;
-    } else {
-      document.getElementById('winnerName').textContent = winners.map(w => `${w.flag} ${w.name}`).join(' vs ');
-      document.getElementById('winnerSub').textContent  = `It's a ${winners.length}-way tie at ${topCount} votes each. Someone needs to make a decision! 😂`;
-    }
-
-    ws.classList.add('visible');
-    if (!confettiFired) { confettiFired = true; launchConfetti(); }
-  }
-
-  // ── VOTE MODAL ───────────────────────────────────────────────────────
-  function openModal(voterId) {
-    currentVoter  = VOTERS.find(v => v.id === voterId);
-    const prev    = getPicks(currentVoter.id) || [];
-    selectedDests = new Set(prev);
-
-    document.getElementById('modalTitle').textContent =
-      `${currentVoter.emoji} ${currentVoter.name} — pick your top destinations`;
-
-    document.getElementById('destGrid').innerHTML = DESTINATIONS.map(d => `
-      <div class="dest-card ${selectedDests.has(d.id) ? 'selected' : ''}" id="dest-${d.id}" onclick="toggleDest('${d.id}')">
-        <div class="dest-check">✓</div>
-        <img class="dest-img" src="${d.img}" alt="${d.name}"
-             onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" />
-        <div class="dest-info">
-          <div class="dest-name">${d.flag} ${d.name}</div>
-          <div class="dest-tag">${d.tag}</div>
-        </div>
-      </div>`).join('');
-
-    updateConfirmBtn();
-    document.getElementById('modalOverlay').classList.add('active');
-  }
-
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('active');
-    currentVoter = null;
-    selectedDests.clear();
-  }
-
-  function toggleDest(destId) {
-    if (selectedDests.has(destId)) {
-      selectedDests.delete(destId);
-      document.getElementById('dest-' + destId).classList.remove('selected');
-    } else {
-      selectedDests.add(destId);
-      document.getElementById('dest-' + destId).classList.add('selected');
-    }
-    updateConfirmBtn();
-  }
-
-  function updateConfirmBtn() {
-    const n   = selectedDests.size;
-    const btn = document.getElementById('confirmBtn');
-    btn.disabled    = n === 0;
-    btn.textContent = n === 0
-      ? '🔒 Pick something first'
-      : `🔒 Lock in ${n} pick${n > 1 ? 's' : ''}!`;
-  }
-
-  async function confirmVote() {
-    if (!currentVoter || selectedDests.size === 0) return;
-    const btn = document.getElementById('confirmBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>Saving…';
-    confettiFired = false;
-    await fbWrite(DB_VOTES, currentVoter.id, Array.from(selectedDests));
-    closeModal();
-    btn.textContent = '🔒 Lock it in!';
-  }
-
-  async function resetVotes() {
-    if (!confirm('Reset ALL votes?')) return;
-    confettiFired = false;
-    await fbDelete(DB_VOTES);
-  }
-
-  // ── Confetti ─────────────────────────────────────────────────────────
-  function launchConfetti() {
-    const colors = ['#ff4757','#f9ca24','#00b894','#8e44ad','#00cec9','#6c5ce7','#e84393'];
-    for (let i = 0; i < 140; i++) {
-      setTimeout(() => {
-        const el = document.createElement('div');
-        el.className = 'confetti-piece';
-        el.style.cssText = `left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*1.5}s;border-radius:${Math.random()>.5?'50%':'2px'}`;
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 6000);
-      }, i * 25);
-    }
-  }
-
-  // ── Close modals on backdrop click ───────────────────────────────────
-  document.getElementById('modalOverlay').addEventListener('click', e => {
-    if (e.target.id === 'modalOverlay') closeModal();
-  });
-  document.getElementById('ksModalOverlay').addEventListener('click', e => {
-    if (e.target.id === 'ksModalOverlay') closeKsModal();
-  });
-
+  function openKsModal(voterId){ksCurrentVoter=VOTERS.find(v=>v.id===voterId);const prev=getKsPick(ksCurrentVoter.id)||{};ksKill=prev.kill||null;ksStar=prev.star||null;ksMode='kill';document.getElementById('ksModalTitle').textContent=`${ksCurrentVoter.emoji} ${ksCurrentVoter.name} — Kill & Star`;renderKsModalGrid();updateKsModeButtons();updateKsSummary();updateKsConfirmBtn();document.getElementById('ksModalOverlay').classList.add('active');}
+  function renderKsModalGrid(){document.getElementById('ksDestGrid').innerHTML=DESTINATIONS.map(d=>{const cc=(ksKill===d.id?' ks-kill-card':'')+(ksStar===d.id?' ks-star-card':'');return `<div class="dest-card${cc}" id="ksdest-${d.id}" onclick="toggleKsDest('${d.id}')"><div class="ks-card-badge ks-kill-badge">☠️</div><div class="ks-card-badge ks-star-badge">⭐</div><img class="dest-img" src="${d.img}" alt="${d.name}" onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" /><div class="dest-info"><div class="dest-name">${d.flag} ${d.name}</div><div class="dest-tag">${d.tag}</div></div></div>`;}).join('');}
+  function setKsMode(mode){ksMode=mode;updateKsModeButtons();}
+  function updateKsModeButtons(){document.getElementById('ksModeKill').className='ks-mode-btn'+(ksMode==='kill'?' kill-active':'');document.getElementById('ksModestar').className='ks-mode-btn'+(ksMode==='star'?' star-active':'');}
+  function toggleKsDest(destId){if(ksMode==='kill'){if(ksKill===destId){ksKill=null;}else{if(ksStar===destId)ksStar=null;ksKill=destId;}}else{if(ksStar===destId){ksStar=null;}else{if(ksKill===destId)ksKill=null;ksStar=destId;}}updateKsCardStates();updateKsSummary();updateKsConfirmBtn();}
+  function updateKsCardStates(){DESTINATIONS.forEach(d=>{const c=document.getElementById('ksdest-'+d.id);if(!c)return;c.classList.toggle('ks-kill-card',ksKill===d.id);c.classList.toggle('ks-star-card',ksStar===d.id);});}
+  function updateKsSummary(){document.getElementById('ksSummaryKill').textContent=ksKill?destName(ksKill):'not set';document.getElementById('ksSummaryStar').textContent=ksStar?destName(ksStar):'not set';}
+  function updateKsConfirmBtn(){const btn=document.getElementById('ksConfirmBtn');const hasAny=ksKill||ksStar,hasBoth=ksKill&&ksStar;btn.disabled=!hasAny;btn.textContent=!hasAny?'Pick something first':!hasBoth?`💾 Save (partial — add ${!ksKill?'a kill':'a star'} too?)`:`⚔️ Lock it in!`;}
+  function closeKsModal(){document.getElementById('ksModalOverlay').classList.remove('active');ksCurrentVoter=null;ksKill=null;ksStar=null;}
+  async function confirmKsVote(){if(!ksCurrentVoter||(!ksKill&&!ksStar))return;const btn=document.getElementById('ksConfirmBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Saving…';await fbWrite(DB_KS,ksCurrentVoter.id,{kill:ksKill||null,star:ksStar||null});closeKsModal();}
+  function renderVoters(){document.getElementById('votersGrid').innerHTML=VOTERS.map(v=>{const picks=getPicks(v.id);const ph=picks?picks.map(id=>{const d=DESTINATIONS.find(x=>x.id===id);return d?`<span class="pick-pill">${d.flag} ${d.name}</span>`:''}).join(''):'<span style="color:#555;font-size:.8rem">Nothing yet</span>';return `<div class="voter-card" data-voter="${v.id}"><img class="voter-avatar" src="${v.avatar}" alt="${v.name}" onerror="this.outerHTML='<div style=font-size:4rem;margin:0 auto 12px;width:100px;height:100px;display:flex;align-items:center;justify-content:center>${v.emoji}</div>'" /><div class="voter-name">${v.name}</div><div class="voter-title">${v.title}</div><div class="picks-wrap">${ph}</div><button class="vote-btn" onclick="openModal('${v.id}')">${picks?'🗳️ Vote again':'🗳️ Cast Vote'}</button>${picks?`<button class="change-btn" onclick="openModal('${v.id}')">✏️ Change picks</button>`:''}</div>`;}).join('');}
+  function renderResults(){const counts={};DESTINATIONS.forEach(d=>counts[d.id]=0);Object.values(votes).forEach(v=>{const arr=Array.isArray(v)?v:[v];arr.forEach(id=>{if(counts[id]!==undefined)counts[id]++;});});const max=Math.max(...Object.values(counts),1);const sorted=[...DESTINATIONS].sort((a,b)=>counts[b.id]-counts[a.id]);document.getElementById('results').innerHTML=sorted.map(d=>{const c=counts[d.id],w=(c/max)*100;return `<div class="result-row"><div class="result-label">${d.flag} ${d.name}</div><div class="bar-track"><div class="bar-fill" style="width:${w}%;background:${d.color}">${c>0?c:''}</div></div><div class="result-count">${c}</div></div>`;}).join('');}
+  function checkWinner(){const ws=document.getElementById('winnerSection');if(!VOTERS.every(v=>votes[v.id])){ws.classList.remove('visible');return;}const counts={};DESTINATIONS.forEach(d=>counts[d.id]=0);Object.values(votes).forEach(v=>{const arr=Array.isArray(v)?v:[v];arr.forEach(id=>{if(counts[id]!==undefined)counts[id]++;});});const top=Math.max(...Object.values(counts));const winners=DESTINATIONS.filter(d=>counts[d.id]===top);if(winners.length===1){const w=winners[0];document.getElementById('winnerName').textContent=`${w.flag} ${w.name} ${w.emoji}`;document.getElementById('winnerSub').textContent=`${top} out of 4 legends chose this. Pack your bags — WE'RE GOING TO ${w.name.toUpperCase()}! 🎉`;}else{document.getElementById('winnerName').textContent=winners.map(w=>`${w.flag} ${w.name}`).join(' vs ');document.getElementById('winnerSub').textContent=`It's a ${winners.length}-way tie at ${top} votes each. Someone needs to make a decision! 😂`;}ws.classList.add('visible');if(!confettiFired){confettiFired=true;launchConfetti();}}
+  function openModal(voterId){currentVoter=VOTERS.find(v=>v.id===voterId);selectedDests=new Set(getPicks(currentVoter.id)||[]);document.getElementById('modalTitle').textContent=`${currentVoter.emoji} ${currentVoter.name} — pick your top destinations`;document.getElementById('destGrid').innerHTML=DESTINATIONS.map(d=>`<div class="dest-card ${selectedDests.has(d.id)?'selected':''}" id="dest-${d.id}" onclick="toggleDest('${d.id}')"><div class="dest-check">✓</div><img class="dest-img" src="${d.img}" alt="${d.name}" onerror="this.outerHTML='<div class=dest-img-fallback style=background:${d.color}22>${d.emoji}</div>'" /><div class="dest-info"><div class="dest-name">${d.flag} ${d.name}</div><div class="dest-tag">${d.tag}</div></div></div>`).join('');updateConfirmBtn();document.getElementById('modalOverlay').classList.add('active');}
+  function closeModal(){document.getElementById('modalOverlay').classList.remove('active');currentVoter=null;selectedDests.clear();}
+  function toggleDest(destId){if(selectedDests.has(destId)){selectedDests.delete(destId);document.getElementById('dest-'+destId).classList.remove('selected');}else{selectedDests.add(destId);document.getElementById('dest-'+destId).classList.add('selected');}updateConfirmBtn();}
+  function updateConfirmBtn(){const n=selectedDests.size,btn=document.getElementById('confirmBtn');btn.disabled=n===0;btn.textContent=n===0?'🔒 Pick something first':`🔒 Lock in ${n} pick${n>1?'s':''}!`;}
+  async function confirmVote(){if(!currentVoter||selectedDests.size===0)return;const btn=document.getElementById('confirmBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Saving…';confettiFired=false;await fbWrite(DB_VOTES,currentVoter.id,Array.from(selectedDests));closeModal();btn.textContent='🔒 Lock it in!';}
+  async function resetVotes(){if(!confirm('Reset ALL votes?'))return;confettiFired=false;await fbDelete(DB_VOTES);}
+  function launchConfetti(){const colors=['#ff4757','#f9ca24','#00b894','#8e44ad','#00cec9','#6c5ce7','#e84393'];for(let i=0;i<140;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti-piece';el.style.cssText=`left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*1.5}s;border-radius:${Math.random()>.5?'50%':'2px'}`;document.body.appendChild(el);setTimeout(()=>el.remove(),6000);},i*25);}}
+  document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target.id==='modalOverlay')closeModal();});
+  document.getElementById('ksModalOverlay').addEventListener('click',e=>{if(e.target.id==='ksModalOverlay')closeKsModal();});
   initListeners();
 </script>
 </body>
