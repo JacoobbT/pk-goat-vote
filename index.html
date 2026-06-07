@@ -67,26 +67,13 @@
     .result-count { width:30px; text-align:center; font-weight:900; font-size:1.05rem; }
 
     /* ── KILL & STAR SCOREBOARD ── */
-    .ks-result-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-    .ks-result-label { width:130px; font-weight:700; font-size:.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .ks-bars { flex:1; display:flex; flex-direction:column; gap:4px; }
-    .ks-bar-row { display:flex; align-items:center; gap:6px; }
-    .ks-bar-label { font-size:.7rem; font-weight:900; width:22px; text-align:right; }
-    .ks-bar-track { flex:1; height:14px; background:#1e1e2e; border-radius:7px; overflow:hidden; }
-    .ks-bar-fill { height:100%; border-radius:7px; transition:width .6s cubic-bezier(.34,1.56,.64,1); }
-    .ks-star-fill { background:linear-gradient(90deg,#f9ca24,#f0932b); }
-    .ks-kill-fill { background:linear-gradient(90deg,#ff4757,#c0392b); }
-    .ks-counts { display:flex; flex-direction:column; gap:4px; width:28px; }
-    .ks-count { font-size:.8rem; font-weight:900; text-align:center; }
-    .ks-net { width:42px; text-align:center; }
-    .ks-net-val { font-size:.95rem; font-weight:900; padding:2px 6px; border-radius:8px; }
-    .ks-net-pos { background:rgba(249,202,36,.15); color:#f9ca24; }
-    .ks-net-neg { background:rgba(255,71,87,.15); color:#ff4757; }
-    .ks-net-zero { background:#1e1e2e; color:#666; }
-    .ks-killed-label {
-      font-size:.65rem; font-weight:900; color:#ff4757; margin-left:4px;
-      padding:1px 5px; background:rgba(255,71,87,.12); border-radius:6px;
-    }
+    .ks-score-list { max-width:680px; margin:0 auto; }
+    .ks-score-row { display:flex; align-items:center; gap:12px; padding:9px 0; border-bottom:1px solid #1a1a2e; }
+    .ks-score-dest { width:115px; font-weight:700; font-size:.88rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:0; }
+    .ks-score-actions { display:flex; gap:5px; flex-wrap:wrap; flex:1; }
+    .ks-voter-star { font-size:.72rem; font-weight:700; padding:3px 9px; border-radius:10px; background:rgba(249,202,36,.1); border:1px solid rgba(249,202,36,.25); color:#f9ca24; }
+    .ks-voter-kill { font-size:.72rem; font-weight:700; padding:3px 9px; border-radius:10px; background:rgba(255,71,87,.1); border:1px solid rgba(255,71,87,.25); color:#ff4757; }
+    .ks-empty-state { text-align:center; color:#444; padding:28px; font-size:.9rem; }
 
     /* ── VOTERS (shared) ── */
     .voters-section { max-width:960px; margin:36px auto; padding:0 20px; }
@@ -225,7 +212,9 @@
   </div>
 </div>
 
-<!-- TAB 1 — KILL & STAR -->
+<!-- ══════════════════════════════════════════
+     TAB 1 — KILL & STAR
+══════════════════════════════════════════ -->
 <div id="tab-killstar" class="tab-content active">
 
   <div class="results-section">
@@ -240,7 +229,9 @@
 
 </div>
 
-<!-- TAB 2 — MULTI-VOTE -->
+<!-- ══════════════════════════════════════════
+     TAB 2 — MULTI-VOTE
+══════════════════════════════════════════ -->
 <div id="tab-vote" class="tab-content">
 
   <div class="results-section">
@@ -328,18 +319,22 @@
     { id:'budapest',  name:'Budapest',  flag:'🇭🇺', emoji:'🛁', tag:'Ruin bars • Thermal baths • Danube nights',    color:'#fd79a8', img:'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=400&h=180&fit=crop&q=80' }
   ];
 
+  // ── State ────────────────────────────────────────────────────────────
   let votes       = {};
-  let ksVotes     = {};
+  let ksVotes     = {};   // { voterId: { kill: destId|null, star: destId|null } }
   let confettiFired = false;
 
+  // multi-vote modal
   let currentVoter  = null;
   let selectedDests = new Set();
 
+  // kill & star modal
   let ksCurrentVoter = null;
   let ksMode         = 'kill';
   let ksKill         = null;
   let ksStar         = null;
 
+  // ── Tab switching ────────────────────────────────────────────────────
   function switchTab(tab) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -347,6 +342,7 @@
     document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
   }
 
+  // ── Firebase helpers ─────────────────────────────────────────────────
   async function fbWrite(path, voter, data) {
     await fetch(`${path}/${voter}.json`, {
       method: 'PUT',
@@ -368,6 +364,7 @@
     return es;
   }
 
+  // ── Live listeners ───────────────────────────────────────────────────
   let connectedCount = 0;
   function markConnected() {
     connectedCount++;
@@ -405,6 +402,7 @@
     });
   }
 
+  // ── Helpers ──────────────────────────────────────────────────────────
   function getPicks(voterId) {
     const v = votes[voterId];
     if (!v) return null;
@@ -419,6 +417,10 @@
     const d = DESTINATIONS.find(x => x.id === id);
     return d ? `${d.flag} ${d.name}` : id;
   }
+
+  // ── ═══════════════════════════════════════════════════════════════
+  //    KILL & STAR RENDERING
+  // ── ═══════════════════════════════════════════════════════════════
 
   function renderKsVoters() {
     document.getElementById('ksVotersGrid').innerHTML = VOTERS.map(v => {
@@ -451,52 +453,46 @@
 
   function renderKsResults() {
     const stars = {}, kills = {};
-    DESTINATIONS.forEach(d => { stars[d.id] = 0; kills[d.id] = 0; });
+    DESTINATIONS.forEach(d => { stars[d.id] = []; kills[d.id] = []; });
 
-    Object.values(ksVotes).forEach(pick => {
+    Object.entries(ksVotes).forEach(([voterId, pick]) => {
       if (!pick) return;
-      if (pick.star && stars[pick.star] !== undefined) stars[pick.star]++;
-      if (pick.kill && kills[pick.kill] !== undefined) kills[pick.kill]++;
+      if (pick.star && stars[pick.star]) stars[pick.star].push(voterId);
+      if (pick.kill && kills[pick.kill]) kills[pick.kill].push(voterId);
     });
-
-    const maxStars = Math.max(...Object.values(stars), 1);
-    const maxKills = Math.max(...Object.values(kills), 1);
 
     const sorted = [...DESTINATIONS].sort((a, b) => {
-      const netB = stars[b.id] - kills[b.id];
-      const netA = stars[a.id] - kills[a.id];
-      if (netB !== netA) return netB - netA;
-      return stars[b.id] - stars[a.id];
+      const netB = stars[b.id].length - kills[b.id].length;
+      const netA = stars[a.id].length - kills[a.id].length;
+      return netB !== netA ? netB - netA : stars[b.id].length - stars[a.id].length;
     });
 
-    document.getElementById('ks-results').innerHTML = sorted.map(d => {
-      const s   = stars[d.id];
-      const k   = kills[d.id];
-      const net = s - k;
-      const netClass = net > 0 ? 'ks-net-pos' : net < 0 ? 'ks-net-neg' : 'ks-net-zero';
-      const starPct  = (s / maxStars) * 100;
-      const killPct  = (k / maxKills) * 100;
+    const active = sorted.filter(d => stars[d.id].length > 0 || kills[d.id].length > 0);
 
-      return `
-        <div class="ks-result-row">
-          <div class="ks-result-label">${d.flag} ${d.name}${k > 0 ? `<span class="ks-killed-label">☠️${k}</span>` : ''}</div>
-          <div class="ks-bars">
-            <div class="ks-bar-row">
-              <div class="ks-bar-label" style="color:#f9ca24">⭐</div>
-              <div class="ks-bar-track"><div class="ks-bar-fill ks-star-fill" style="width:${starPct}%"></div></div>
-              <div class="ks-count" style="color:#f9ca24">${s}</div>
-            </div>
-            <div class="ks-bar-row">
-              <div class="ks-bar-label" style="color:#ff4757">☠️</div>
-              <div class="ks-bar-track"><div class="ks-bar-fill ks-kill-fill" style="width:${killPct}%"></div></div>
-              <div class="ks-count" style="color:#ff4757">${k}</div>
-            </div>
-          </div>
-          <div class="ks-net"><span class="ks-net-val ${netClass}">${net > 0 ? '+' : ''}${net}</span></div>
+    if (active.length === 0) {
+      document.getElementById('ks-results').innerHTML = '<p class="ks-empty-state">No votes yet — be the first!</p>';
+      return;
+    }
+
+    document.getElementById('ks-results').innerHTML = `<div class="ks-score-list">${
+      active.map(d => {
+        const starPills = stars[d.id].map(vid => {
+          const v = VOTERS.find(x => x.id === vid);
+          return `<span class="ks-voter-star">⭐ ${v ? v.name : vid}</span>`;
+        }).join('');
+        const killPills = kills[d.id].map(vid => {
+          const v = VOTERS.find(x => x.id === vid);
+          return `<span class="ks-voter-kill">☠️ ${v ? v.name : vid}</span>`;
+        }).join('');
+        return `<div class="ks-score-row">
+          <div class="ks-score-dest">${d.flag} ${d.name}</div>
+          <div class="ks-score-actions">${starPills}${killPills}</div>
         </div>`;
-    }).join('');
+      }).join('')
+    }</div>`;
   }
 
+  // ── KILL & STAR MODAL ─────────────────────────────────────────────────
   function openKsModal(voterId) {
     ksCurrentVoter = VOTERS.find(v => v.id === voterId);
     const prev = getKsPick(ksCurrentVoter.id) || {};
@@ -505,7 +501,7 @@
     ksMode = 'kill';
 
     document.getElementById('ksModalTitle').textContent =
-      `${ksCurrentVoter.emoji} ${ksCurrentVoter.name} — Kill & Star`;
+      `${ksCurrentVoter.emoji} ${ksCurrentVoter.name} — Kill &amp; Star`;
 
     renderKsModalGrid();
     updateKsModeButtons();
@@ -610,6 +606,10 @@
     closeKsModal();
   }
 
+  // ── ═══════════════════════════════════════════════════════════════
+  //    MULTI-VOTE RENDERING
+  // ── ═══════════════════════════════════════════════════════════════
+
   function renderVoters() {
     document.getElementById('votersGrid').innerHTML = VOTERS.map(v => {
       const picks = getPicks(v.id);
@@ -691,6 +691,7 @@
     if (!confettiFired) { confettiFired = true; launchConfetti(); }
   }
 
+  // ── VOTE MODAL ───────────────────────────────────────────────────────
   function openModal(voterId) {
     currentVoter  = VOTERS.find(v => v.id === voterId);
     const prev    = getPicks(currentVoter.id) || [];
@@ -757,6 +758,7 @@
     await fbDelete(DB_VOTES);
   }
 
+  // ── Confetti ─────────────────────────────────────────────────────────
   function launchConfetti() {
     const colors = ['#ff4757','#f9ca24','#00b894','#8e44ad','#00cec9','#6c5ce7','#e84393'];
     for (let i = 0; i < 140; i++) {
@@ -770,6 +772,7 @@
     }
   }
 
+  // ── Close modals on backdrop click ───────────────────────────────────
   document.getElementById('modalOverlay').addEventListener('click', e => {
     if (e.target.id === 'modalOverlay') closeModal();
   });
